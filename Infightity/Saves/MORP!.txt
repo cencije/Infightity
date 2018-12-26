@@ -1,0 +1,6 @@
+MORP! 12 1 8 4 8 9 6 5
+Gold 25
+Room 1
+Potions 1 0 0
+Weapons
+Key_Items
