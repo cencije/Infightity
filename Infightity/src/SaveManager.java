@@ -375,12 +375,9 @@ public class SaveManager extends JPanel implements ActionListener {
 		try {
 			String currentFile = "../Saves/" + tfName.getText() + ".txt";
 			fileReader = new BufferedReader(new FileReader(currentFile));
-			//System.out.println("TRUE");
 			return true;
 		} catch (Exception e) {
-			//System.out.println("FALSE");
 			return false;
-			//System.out.println("Exception caught."); // Prints if an error is found
 		}
 	}
 
@@ -441,7 +438,6 @@ public class SaveManager extends JPanel implements ActionListener {
 
 		saveFrame.setVisible(true);
 		saveFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		//oNameFrame.setUndecorated(true);
 		saveFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 	}
 
