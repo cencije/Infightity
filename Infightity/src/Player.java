@@ -68,7 +68,6 @@ public class Player {
             maxStrength = 8; armor = 4;  maxArmor = 4; maxHeal = 8;
             maxReactionTime = 9; maxWisdom = 6; maxPersuasion = 5;
             startS = 8; startA = 4; startH = 8; startR = 9; startW = 6; startP = 5;
-            //sprite = new GImage("../Images/Top_Sprites/Plr/Skeleton_Up.png");
         }
         expNeeded = 150;
     }

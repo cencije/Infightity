@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import acm.graphics.GCompound;
 import acm.graphics.GImage;
@@ -15,6 +17,7 @@ public class Sprite extends GCompound implements Runnable {
 	
 	GRect hfill, hb;
 	double healthRemaining;
+	boolean invincibleHit = false;
 	public Sprite(Player p, MainGUI game) {
 		plr = p; 
 		mainGame = game;
@@ -123,8 +126,28 @@ public class Sprite extends GCompound implements Runnable {
     	}
     }
     public void plrHit(int amtHurt) {
-    	plr.getHit(amtHurt);
-    	showHealthBar();
+    	if (!invincibleHit) {
+    		invincibleHit = true;
+        	plr.getHit(amtHurt);
+        	showHealthBar();
+        	Timer t = new Timer();
+        	t.scheduleAtFixedRate(new TimerTask() {
+        		int invincibleTimer = 50;
+    	        public void run() {
+    	        	if (sprite.isVisible()) {
+    	        		sprite.setVisible(false);
+    	        	}
+    	        	else sprite.setVisible(true);
+    	        	invincibleTimer--;
+    	        	if (invincibleTimer == 0) {
+    	        		invincibleHit = false;
+    	        		t.cancel(); 
+    	        	}
+    	        }
+        	}, 0, 100);
+    	}
+    	
+    	
     }
     public void showHealthBar() {
     	healthRemaining = plr.getHealthPercentage();

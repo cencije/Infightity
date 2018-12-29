@@ -105,7 +105,7 @@ public class Inventory extends JPanel implements ActionListener {
  	            clip.open(af, audio, 0, size);
  	            clip.start();
  	    		} catch (Exception f) {}
- 	    		
+ 	    		mainGame.spr.showHealthBar();
  	    	}}});
  	    lblPM = new JLabel(new ImageIcon("../Images/Items/Potion2_Medium.png")); lblPM.setBounds(125, 30, 32, 32); mainFrame.add(lblPM);
 	    lblPM.addMouseListener(new MouseAdapter() { public void mouseClicked(MouseEvent e) {
@@ -118,6 +118,7 @@ public class Inventory extends JPanel implements ActionListener {
  	 	            clip.open(af, audio, 0, size);
  	 	            clip.start();
  	 	    		} catch (Exception f) {}
+ 	    		mainGame.spr.showHealthBar();
  	    	}}});
 	    lblPL = new JLabel(new ImageIcon("../Images/Items/Potion3_Large.png")); lblPL.setBounds(160, 30, 32, 32); mainFrame.add(lblPL);
  	    lblPL.addMouseListener(new MouseAdapter() { public void mouseClicked(MouseEvent e) {
@@ -130,6 +131,7 @@ public class Inventory extends JPanel implements ActionListener {
  	 	            clip.open(af, audio, 0, size);
  	 	            clip.start();
  	 	    		} catch (Exception f) {}
+ 	    		mainGame.spr.showHealthBar();
  	    	}}});
  	    lblS = new JLabel(new ImageIcon("../Images/Items/Potion4_Strength.png")); lblS.setBounds(90, 70, 32, 32); mainFrame.add(lblS);
 	    lblS.addMouseListener(new MouseAdapter() { public void mouseClicked(MouseEvent e) {

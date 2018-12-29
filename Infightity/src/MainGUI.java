@@ -73,6 +73,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	GImage shop2 = new GImage("../Images/Top_Sprites/Comps/Shop2.png");
 	ArrayList<ArrayList<Integer>> passableList = new ArrayList<ArrayList<Integer>>();
 
+	ArrayList<Attack> attackList = new ArrayList<Attack>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	boolean paused = false;
 
@@ -81,6 +82,11 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	boolean screenChanged = false;
 	boolean moveUp = false, moveDown = false, moveRight = false, moveLeft = false;
 	boolean notHeld = true;
+	
+	GLabel glblEnemy;
+	GRect rectHRem, rectHBar;
+	GImage imgEnemy;
+	GRect rectProfile;
 	public void init() {
 		this.setSize(600,600); width = getWidth(); height = getHeight();
 		setBackground(menuColor); 
@@ -114,17 +120,17 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		GRect rectTop = new GRect(0,0,600,30); rectTop.setFilled(true); rectTop.setFillColor(bar); rectTop.setColor(bar); add(rectTop);
 		GRect rectBot = new GRect(0, 430, 600, 170); rectBot.setFilled(true); rectBot.setFillColor(bar); rectBot.setColor(bar); add(rectBot);
 
-		GRect rectProfile = new GRect(510,441,85,85); rectProfile.setFilled(true); rectProfile.setFillColor(menuColor); 
+		rectProfile = new GRect(510,441,85,85); rectProfile.setFilled(true); rectProfile.setFillColor(menuColor); 
 		rectProfile.setColor(Color.WHITE); add(rectProfile);
-		GImage imgEnemy = new GImage("../Images/Enemy_Sprites/E8_Cyclops.png");
+		imgEnemy = new GImage("../Images/Enemy_Sprites/E1_Morp.gif"); imgEnemy.setVisible(false);
 		add(imgEnemy, 512, 445);
-		GLabel glblEnemy = new GLabel("Bloody Bones", 552, 541);
+		glblEnemy = new GLabel("Morp", 552, 541);
 		glblEnemy.setFont(new Font("Verdana", Font.PLAIN, 13));
 		glblEnemy.move(-glblEnemy.getWidth()/2, 0);
 		add(glblEnemy);
-		GRect rectHRem = new GRect(510,550,85,15); rectHRem.setFilled(true); rectHRem.setFillColor(Color.RED); 
+		rectHRem = new GRect(510,550,85,15); rectHRem.setFilled(true); rectHRem.setFillColor(Color.RED); 
 		rectHRem.setColor(Color.BLACK); add(rectHRem); rectHRem.setVisible(false);
-		GRect rectHBar = new GRect(510,550,85,15); rectHBar.setFilled(true); rectHBar.setFillColor(Color.GREEN); 
+		rectHBar = new GRect(510,550,85,15); rectHBar.setFilled(true); rectHBar.setFillColor(Color.GREEN); 
 		rectHBar.setColor(Color.BLACK); add(rectHBar); rectHBar.setVisible(false);
 
 		add(imgBG, 0, 30);
@@ -165,6 +171,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		room.setMain(this);
 		room.makeRoom("Room"+roomNumber, 3);
 		if (spr != null) { p.pX = 0; p.pY = 0; }
+		insert_enemies();
 	}
 	public void setMap(ArrayList<ArrayList<Tile>> tilesP, ArrayList<ArrayList<Integer>> tileVals) {
 		tilePieces = tilesP; passableList = tileVals;
@@ -286,9 +293,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		System.out.println("PLAYER SET!"); 
 		p = plr; spr = new Sprite(p, this); 
 		add(spr, 50, 80);
-		new Thread(spr).start();
-		
-		
+		new Thread(spr).start();		
 	}
 
 	public void actionPerformed(ActionEvent evt) {
@@ -377,14 +382,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			break;
 		}
 		case KeyEvent.VK_E: {
-			eL.make_current_enemies(1, 0, 0, 0);
-			for (int i = 0; i < eL.getEnemyList().size(); i++) {
-				
-				Enemy enemy = eL.getEnemy(i);
-				System.out.println("Enemy: " + enemy.name + " ID:" + enemy.id + " Health: " + enemy.healthCurrent);
-				new Thread(enemy).start();
-				add(enemy, 200,200);
-			}
+			insert_enemies();
 			break;
 		}
 		case KeyEvent.VK_W: {
@@ -471,6 +469,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			if (dir == 4) add(objAtk, spr.getX() - 24, spr.getY());
 		}
 		new Thread(objAtk).start();
+		attackList.add(objAtk);
 	}
 
 	public void drawWeather(int cond) {
@@ -499,6 +498,20 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		add(shop1, 500, 100);
 	}
 	
+	public void insert_enemies() {
+		eL.make_current_enemies(1, 1, 0, 0);
+		for (int i = 0; i < eL.getEnemyList().size(); i++) {
+			
+			Enemy enemy = eL.getEnemy(i);
+			System.out.println("Enemy: " + enemy.name + " ID:" + enemy.id + " Health: " + enemy.healthCurrent);
+			new Thread(enemy).start();
+			enemyList.add(enemy);
+			add(enemy, 200,200);
+		}
+		imgEnemy.setVisible(true);
+		rectHRem.setVisible(true);
+		rectHBar.setVisible(true);
+	}
 	public boolean collision_Enemy(Enemy e) {
 		if (e.enemyID == 1) {
 			if (e.dir == 1) {
@@ -525,6 +538,37 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			}
 			else if (e.dir == 4) {
 				int tx2 = (int) (e.getX() - 2) / 40;
+				if (!collide((int) (e.getY() - 30) / 40, tx2) && !collide((int) (e.getY() - 5) / 40, tx2)) return false;
+				else {
+					return true;
+				}
+			}
+		}
+		else if (e.enemyID == 2) {
+			if (e.dir == 1) {
+				int ty2 = (int) (e.getY() - 1 - 30) / 40;
+				if (!collide(ty2, (int) (e.getX()) / 40) && !collide(ty2, (int) (e.getX() + 24) / 40)) return false;
+				else {
+					return true;
+				}
+			}
+			else if (e.dir == 2) {
+				int tx2 = (int) (e.getX() + 25 + 1) / 40;
+				if (!collide((int) (e.getY() - 30) / 40, tx2) && !collide((int) (e.getY() - 5) / 40, tx2)) return false;
+				else {
+					return true;
+				}
+				
+			}
+			else if (e.dir == 3) {
+				int ty2 = (int) (e.getY() + 25 + 1 - 30) / 40;
+				if (!collide(ty2, (int) (e.getX()) / 40) && !collide(ty2, (int) (e.getX() + 24) / 40)) return false;
+				else {
+					return true;
+				}
+			}
+			else if (e.dir == 4) {
+				int tx2 = (int) (e.getX() - 1) / 40;
 				if (!collide((int) (e.getY() - 30) / 40, tx2) && !collide((int) (e.getY() - 5) / 40, tx2)) return false;
 				else {
 					return true;

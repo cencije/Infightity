@@ -15,14 +15,14 @@ public class EnemyList {
     					 "Bob", "Garth", "Mary", "Benito", "Fabian", "Larry", "Demetrius",
     					 "Scott", "Adan", "Randall", "Johnie", "Rodney", "Abraham", 
     					 "Emmanuel", "Frances" };
-    ArrayList<Enemy> enemyArrayList = new ArrayList<Enemy>();
+    
+    ArrayList<ArrayList<ArrayList<CoordinatePair>>> enemyArrayList = new ArrayList<ArrayList<ArrayList<CoordinatePair>>>();
     
     ArrayList<Enemy> enemyListCurrent = new ArrayList<Enemy>();
     
     public void set_main(MainGUI mainGUI) { this.mainGUI = mainGUI; }
     public void setEnemyList(MainGUI mainGUI)
     {
-    	
     	
         enemy1 = new Enemy(1000, 1, mainGUI);
         enemy1.name = "Morp";
@@ -55,6 +55,19 @@ public class EnemyList {
     }
 
     
+    public void setup_enemy_rooms(int roomNumber) {
+    	ArrayList<ArrayList<CoordinatePair>> room1List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r1Morp = new ArrayList<CoordinatePair>();
+    	r1Morp.add(new CoordinatePair(150, 150, 1)); r1Morp.add(new CoordinatePair(200, 200, 2));
+    	room1List.add(r1Morp);
+    	enemyArrayList.add(room1List);
+    	if (roomNumber == 1) make_current_enemies(1,0,0,0);
+    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
+    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
+    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
+    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
+    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
+    }
     public void make_current_enemies(int morp, int peasants, int archers, int spearmen) {
     	
     	for (int m = 0; m < morp; m++) {
@@ -92,9 +105,22 @@ public class EnemyList {
     {
         return enemyListCurrent.get(enemyNo);
     }
+    public void setEnemyList(int roomNumber) {
+    	clear_enemy_list();
+    	int enemyNumber = 1;
+    	ArrayList<ArrayList<CoordinatePair>> listCurrentRoom = enemyArrayList.get(roomNumber);
+    	for (int i = 0; i < listCurrentRoom.size(); i++) {
+    		for (int j = 0; j < listCurrentRoom.get(j).size(); j++) {
+    			Enemy e = new Enemy(enemyNumber, j+1, mainGUI);
+    			enemyNumber++;
+    			enemyListCurrent.add(e);
+    		}
+    	}
+    }
     public ArrayList<Enemy> getEnemyList() { return enemyListCurrent; }
     public void clear_enemy_list() { enemyListCurrent.clear(); }
 
 
+    
 
 }

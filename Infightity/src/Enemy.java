@@ -49,7 +49,13 @@ public class Enemy extends GCompound implements Runnable {
     		imgProfile = new GImage("../Images/Enemy_Sprites/E1_Morp.gif");
     	}
     	if (enemyID == 2) {
-    		imgTop = new GImage("../Images/Top_Sprites/Enemy/");
+    		int dirStart = rand.nextInt(4) + 1;
+    		dir = dirStart;
+    		if (dir == 1)      { imgTop = new GImage("../Images/Top_Sprites/Enemy/Peasant_U.gif"); xMove = 0; yMove = -2; }
+    		else if (dir == 2) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Peasant_R.gif"); xMove = 2; yMove = 0; }
+    		else if (dir == 3) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Peasant_D.gif"); xMove = 0; yMove = 2; }
+    		else if (dir == 4) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Peasant_L.gif"); xMove = -2; yMove = 0; }
+    		
     		imgProfile = new GImage("../Images/Enemy_Sprites/E2_Peasant.png");
     	}
     	if (enemyID == 4) {
@@ -90,7 +96,7 @@ public class Enemy extends GCompound implements Runnable {
     		pause(DELAY);
     		move(xMove,yMove);
     		if (mainGUI.collision_Enemy(this)) {
-    			if (enemyID == 1) {
+    			if (enemyID == 1 || enemyID == 2) {
     				xMove = xMove * -1; yMove = yMove * -1;
     				if (dir == 1)      { dir = 3;} 
     				else if (dir == 2) { dir = 4; }
@@ -113,22 +119,22 @@ public class Enemy extends GCompound implements Runnable {
     public void changeSprite(int newDir) {
     	if (newDir == 1) {
     		if (enemyID == 1) imgTop.setImage("../Images/Top_Sprites/Enemy/Morp_U.gif");
-    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_U.png");
+    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_U.gif");
     		if (enemyID == 4) imgTop.setImage("../Images/Top_Sprites/Enemy/WizE_Up.png");
     	}
     	if (newDir == 2) {
     		if (enemyID == 1) imgTop.setImage("../Images/Top_Sprites/Enemy/Morp_R.gif");
-    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_R.png");
+    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_R.gif");
     		if (enemyID == 4) imgTop.setImage("../Images/Top_Sprites/Enemy/WizE_Right.png");
     	}
     	if (newDir == 3) {
     		if (enemyID == 1) imgTop.setImage("../Images/Top_Sprites/Enemy/Morp_D.gif");
-    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_D.png");
+    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_D.gif");
     		if (enemyID == 4) imgTop.setImage("../Images/Top_Sprites/Enemy/WizE_Down.png");
     	}
     	if (newDir == 4) {
     		if (enemyID == 1) imgTop.setImage("../Images/Top_Sprites/Enemy/Morp_L.gif");
-    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_L.png");
+    		if (enemyID == 2) imgTop.setImage("../Images/Top_Sprites/Enemy/Peasant_L.gif");
     		if (enemyID == 4) imgTop.setImage("../Images/Top_Sprites/Enemy/WizE_Left.png");
     	}
     }
@@ -142,6 +148,6 @@ public class Enemy extends GCompound implements Runnable {
 	        	deathTimer--;
 	        	if (deathTimer == 0) t.cancel(); removeAll();
 	        }
-	    }, 1000, 1000);
+	    }, 0, 1000);
     }
 }
