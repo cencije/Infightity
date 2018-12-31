@@ -12,6 +12,7 @@ public class Tile extends GCompound {
 		id = type;
 		if (type <= 10) { canPass = false; }
 		else canPass = true;
+		
 		if (type == 0)        img = new GImage("../Images/Top_Sprites/Tiles/Wall_Block.png"); 
 		else if (type == 1)   img = new GImage("../Images/Top_Sprites/Tiles/Wall_Block.png"); 
 		else if (type == 2)   img = new GImage("../Images/Top_Sprites/Tiles/Wall_HT.png"); 
@@ -30,14 +31,20 @@ public class Tile extends GCompound {
 		else if (type == 32)  img = new GImage("../Images/Top_Sprites/Tiles/Snow_1.png");
 		else if (type == 90)  img = new GImage("../Images/Top_Sprites/Tiles/Water_1.gif");
 		else if (type == 100) img = new GImage("../Images/Top_Sprites/Tiles/Wood_2.png");
+		else if (type == 101) img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPV.png");
+		else if (type == 102) img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPH.png");
+		else if (type == 103)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPCTL.png");
+		else if (type == 104)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPCTR.png");
+		else if (type == 105)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPCBL.png");
+		else if (type == 106)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPCBR.png");
 		width = x; height = y;
 		img.setSize(width, height);
 		add(img);
 	}
 	public void setTile(int type) {
 		id = type;
-		if (type <= 10)       { canPass = false; }
-		else canPass = true;
+		/*if (type <= 10)       { canPass = false; }
+		else canPass = true;*/
 		if (type == 1)        { img.setImage("../Images/Top_Sprites/Tiles/Wall_Block.png"); }
 		else if (type == 2)   { img.setImage("../Images/Top_Sprites/Tiles/Wall_HT.png"); } 
 		else if (type == 3)   { img.setImage("../Images/Top_Sprites/Tiles/Wall_VR.png"); }
@@ -55,6 +62,12 @@ public class Tile extends GCompound {
 		else if (type == 32)  { img.setImage("../Images/Top_Sprites/Tiles/Snow_1.png"); }
 		else if (type == 90)  { img.setImage("../Images/Top_Sprites/Tiles/Water_1.gif"); }
 		else if (type == 100) { img.setImage("../Images/Top_Sprites/Tiles/Wood_2.png"); }
+		else if (type == 101) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPV.png"); }
+		else if (type == 102) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPH.png"); }
+		else if (type == 103) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPCTL.png"); }
+		else if (type == 104) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPCTR.png"); }
+		else if (type == 105) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPCBL.png"); }
+		else if (type == 106) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPCBR.png"); }
 
 	}
 }

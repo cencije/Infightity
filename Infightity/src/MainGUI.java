@@ -127,6 +127,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		glblEnemy = new GLabel("Morp", 552, 541);
 		glblEnemy.setFont(new Font("Verdana", Font.PLAIN, 13));
 		glblEnemy.move(-glblEnemy.getWidth()/2, 0);
+		glblEnemy.setVisible(false);
 		add(glblEnemy);
 		rectHRem = new GRect(510,550,85,15); rectHRem.setFilled(true); rectHRem.setFillColor(Color.RED); 
 		rectHRem.setColor(Color.BLACK); add(rectHRem); rectHRem.setVisible(false);
