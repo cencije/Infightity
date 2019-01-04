@@ -1,10 +1,12 @@
 
+import java.awt.Color;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import acm.graphics.GCompound;
 import acm.graphics.GImage;
+import acm.graphics.GRect;
 
 /**
  * Created by Joe on 6/21/16.
@@ -20,6 +22,7 @@ public class Enemy extends GCompound implements Runnable {
     int level = 1;
     boolean critPoint = false, isDead = false;
 
+    int x, y;
     int xMove, yMove;
     int dir = 1;
     
@@ -68,6 +71,7 @@ public class Enemy extends GCompound implements Runnable {
     		setHealth(10,10); setArmor(0);
     		setAttackMin(1); setAttackMax(5);
     	}
+    	
     	add(imgTop);
     }
     public void takeDamage(int dmg)
@@ -149,5 +153,8 @@ public class Enemy extends GCompound implements Runnable {
 	        	if (deathTimer == 0) t.cancel(); removeAll();
 	        }
 	    }, 0, 1000);
+    }
+    public void delete() {
+    	removeAll();
     }
 }

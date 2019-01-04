@@ -36,7 +36,6 @@ public class Attack extends GCompound implements Runnable {
 		Timer t = new Timer();
 		t.scheduleAtFixedRate(new TimerTask() {
 	        public void run() {
-	            //System.out.println("Tick");
 	            t.cancel();
 	            running = false;
 	        }

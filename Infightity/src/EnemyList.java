@@ -55,18 +55,19 @@ public class EnemyList {
     }
 
     
-    public void setup_enemy_rooms(int roomNumber) {
+    public void setup_enemy_rooms() {
+    	ArrayList<ArrayList<CoordinatePair>> room0List = new ArrayList<ArrayList<CoordinatePair>>();
+    	enemyArrayList.add(room0List);
     	ArrayList<ArrayList<CoordinatePair>> room1List = new ArrayList<ArrayList<CoordinatePair>>();
-    	ArrayList<CoordinatePair> r1Morp = new ArrayList<CoordinatePair>();
-    	r1Morp.add(new CoordinatePair(150, 150, 1)); r1Morp.add(new CoordinatePair(200, 200, 2));
-    	room1List.add(r1Morp);
     	enemyArrayList.add(room1List);
-    	if (roomNumber == 1) make_current_enemies(1,0,0,0);
-    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
-    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
-    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
-    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
-    	else if (roomNumber == 2) make_current_enemies(1,0,0,0);
+    	ArrayList<ArrayList<CoordinatePair>> room2List = new ArrayList<ArrayList<CoordinatePair>>();
+    	enemyArrayList.add(room2List);
+    	ArrayList<ArrayList<CoordinatePair>> room3List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r3Morp = new ArrayList<CoordinatePair>();
+    	r3Morp.add(new CoordinatePair(150, 150, 1)); r3Morp.add(new CoordinatePair(200, 200, 2));
+    	room3List.add(r3Morp);
+    	enemyArrayList.add(room3List);
+    	
     }
     public void make_current_enemies(int morp, int peasants, int archers, int spearmen) {
     	
@@ -110,10 +111,12 @@ public class EnemyList {
     	int enemyNumber = 1;
     	ArrayList<ArrayList<CoordinatePair>> listCurrentRoom = enemyArrayList.get(roomNumber);
     	for (int i = 0; i < listCurrentRoom.size(); i++) {
-    		for (int j = 0; j < listCurrentRoom.get(j).size(); j++) {
+    		for (int j = 0; j < listCurrentRoom.get(i).size(); j++) {
     			Enemy e = new Enemy(enemyNumber, j+1, mainGUI);
     			enemyNumber++;
     			enemyListCurrent.add(e);
+    			e.x = listCurrentRoom.get(i).get(j).x;
+    			e.y = listCurrentRoom.get(i).get(j).y;
     		}
     	}
     }
