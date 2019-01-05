@@ -64,9 +64,19 @@ public class EnemyList {
     	enemyArrayList.add(room2List);
     	ArrayList<ArrayList<CoordinatePair>> room3List = new ArrayList<ArrayList<CoordinatePair>>();
     	ArrayList<CoordinatePair> r3Morp = new ArrayList<CoordinatePair>();
-    	r3Morp.add(new CoordinatePair(150, 150, 1)); r3Morp.add(new CoordinatePair(200, 200, 2));
+    	r3Morp.add(new CoordinatePair(150, 150, 1)); r3Morp.add(new CoordinatePair(200, 150, 1));
     	room3List.add(r3Morp);
     	enemyArrayList.add(room3List);
+    	ArrayList<ArrayList<CoordinatePair>> room4List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r4Morp = new ArrayList<CoordinatePair>();
+    	r4Morp.add(new CoordinatePair(150, 150, 1)); r4Morp.add(new CoordinatePair(200, 200, 1));
+    	room4List.add(r4Morp);
+    	enemyArrayList.add(room4List);
+    	ArrayList<ArrayList<CoordinatePair>> room5List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r5Morp = new ArrayList<CoordinatePair>();
+    	r5Morp.add(new CoordinatePair(150, 150, 1)); r5Morp.add(new CoordinatePair(200, 200, 1));
+    	room5List.add(r4Morp);
+    	enemyArrayList.add(room5List);
     	
     }
     public void make_current_enemies(int morp, int peasants, int archers, int spearmen) {

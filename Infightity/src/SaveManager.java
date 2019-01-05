@@ -325,7 +325,7 @@ public class SaveManager extends JPanel implements ActionListener {
 					mainGame.tfEventArea.setText("Player: " + plr.countPL + " loaded!");
 					mainGame.makeScreen(roomNo);
 					mainGame.setPlayer(plr);
-
+					mainGame.room.add_above_components(roomNo);
 					mainGame.enableButtons();
 				} catch (Exception e) { System.out.println("ERROR");}
 			}

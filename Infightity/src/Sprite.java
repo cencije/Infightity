@@ -33,6 +33,16 @@ public class Sprite extends GCompound implements Runnable {
     	blk.setFillColor(Color.BLACK);
     	add(blk);
     	*/
+    	hfill = new GRect(-2, -5, 29, 3);
+    	hfill.setFillColor(Color.RED); hfill.setColor(Color.BLACK);
+    	hfill.setFilled(true); add(hfill);
+    	
+    	healthRemaining = plr.getHealthPercentage();
+    	hb = new GRect(-2, -5, 29, 3);
+    	hb.setFillColor(Color.GREEN); hb.setColor(Color.BLACK);
+    	hb.setFilled(true); add(hb);
+    	hb.setBounds(-2, -5, 29 * healthRemaining, 3);
+    	showHealthBar();
 	}
 	
     public void setSprite(int id) {
@@ -66,16 +76,7 @@ public class Sprite extends GCompound implements Runnable {
     		}
     		sprite.setSize(25,25);
     		
-    		hfill = new GRect(-2, -5, 29, 3);
-        	hfill.setFillColor(Color.RED); hfill.setColor(Color.BLACK);
-        	hfill.setFilled(true); add(hfill);
-        	
-        	healthRemaining = plr.getHealthPercentage();
-        	hb = new GRect(-2, -5, 29, 3);
-        	hb.setFillColor(Color.GREEN); hb.setColor(Color.BLACK);
-        	hb.setFilled(true); add(hb);
-        	hb.setBounds(-2, -5, 29 * healthRemaining, 3);
-        	showHealthBar();
+    		
     	}
     }
     public void prev_Dir() {

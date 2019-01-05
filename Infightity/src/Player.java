@@ -127,9 +127,9 @@ public class Player {
         }
     }
     public double getHealthPercentage() {
-    	System.out.println("C: " + currentHealth + " M: " + maxHealth);
+    	//System.out.println("C: " + currentHealth + " M: " + maxHealth);
     	double percentageHealth = (double)currentHealth / maxHealth;
-    	System.out.println("%: " + percentageHealth);
+    	//System.out.println("%: " + percentageHealth);
     	return percentageHealth;
     }
     public void setGoldAmount(int varGold) {

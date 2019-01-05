@@ -9,7 +9,7 @@ public class Room {
 
 	ArrayList<ArrayList<Tile>> tilePieces = new ArrayList<ArrayList<Tile>>();
 	ArrayList<ArrayList<Integer>> collisionVals = new ArrayList<ArrayList<Integer>>();
-	ArrayList<GImage> componentList = new ArrayList<GImage>();
+	ArrayList<ArrayList<Component>> componentList = new ArrayList<ArrayList<Component>>();
 	MainGUI mainGame;
 	int roomNumber = 0;
 	Scanner sc = null;
@@ -18,8 +18,8 @@ public class Room {
 	}
 
 
-	public void makeRoom(String roomFile, int roomStyle) {
-		System.out.println("YAH!");
+	public void makeRoom(String roomFile, int roomNumber, int roomStyle) {
+		//System.out.println("YAH!");
 		tilePieces.clear();
 		collisionVals.clear();
 		File file = new File("../Layouts/" + roomFile + ".txt"); 
@@ -64,6 +64,15 @@ public class Room {
 				else if (word.equals("¶")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 27)); }
 				else if (word.equals("•")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 28)); }
 				else if (word.equals("ª")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 29)); }
+				else if (word.equals("c")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 31)); }
+				else if (word.equals("™")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 32)); }
+				else if (word.equals("£")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 33)); }
+				else if (word.equals("¢")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 34)); }
+				else if (word.equals("∞")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 35)); }
+				else if (word.equals("œ")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 36)); }
+				else if (word.equals("´")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 37)); }
+				else if (word.equals("∑")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 38)); }
+				else if (word.equals("®")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 39)); }
 				else if (word.equals("f")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 301)); }
 				else if (word.equals("x")) { 
 					if (roomStyle == 1) {
@@ -92,7 +101,7 @@ public class Room {
 			}
 
 			sc.close();
-			addComponents(roomFile);
+			addComponents(roomNumber);
 			mainGame.setMap(tilePieces, collisionVals);
 			
 		} catch (FileNotFoundException e) {
@@ -102,38 +111,63 @@ public class Room {
 
 
 	}
-	public void addComponents(String roomFile) {
-		System.out.println("PRE LOOP Component list size: " + componentList.size());
-		for (int i = 0; i < componentList.size(); i++) {
-			System.out.println("YEET: " + i);
-			mainGame.remove(componentList.get(i));
+	public void setUpComponents() {
+		ArrayList<Component> listR0 = new ArrayList<Component>();
+		componentList.add(listR0);
+		ArrayList<Component> listR1 = new ArrayList<Component>();
+		Component cBed1_1 = new Component(201, false, true, 110, 70); listR1.add(cBed1_1);
+		Component cTable1_1 = new Component(202, false, false, 140, 70); listR1.add(cTable1_1);
+		Component cRug1_1 = new Component(252, false, false, 60, 150); listR1.add(cRug1_1);
+		Component cDoor1_1 = new Component(1, false, true, 80, 190); listR1.add(cDoor1_1);
+		Component cDoor1_2 = new Component(1, false, true, 480, 190); listR1.add(cDoor1_2);
+		Component cFenceV1_1 = new Component(301, false, false, 355, 267); listR1.add(cFenceV1_1);
+		Component cFenceH1_1 = new Component(302, false, false, 355, 267); listR1.add(cFenceH1_1);
+		Component cTree1_1 = new Component(401, true, true, 240, 300); listR1.add(cTree1_1);
+		Component cTree1_2 = new Component(402, true, true, 330, 200); listR1.add(cTree1_2);
+		Component cTree1_3 = new Component(403, true, true, 225, 170); listR1.add(cTree1_3);
+
+		componentList.add(listR1);
+		ArrayList<Component> listR2 = new ArrayList<Component>();
+		Component cRug2_1 = new Component(253, false, false, 160, 250); listR2.add(cRug2_1);
+		Component cFenceV2_1 = new Component(301, false, false, 355, 70); listR2.add(cFenceV2_1);
+		Component cFenceH2_1 = new Component(302, false, false, 355, 189); listR2.add(cFenceH2_1);
+		Component cDoor2_1 = new Component(2, false, true, 200, 270); listR2.add(cDoor2_1);
+		Component cTree2_1 = new Component(401, true, true, 280, 325); listR2.add(cTree2_1);
+		Component cTree2_2 = new Component(402, true, true, 310, 220); listR2.add(cTree2_2);
+		Component cTree2_3 = new Component(403, true, true, 465, 310); listR2.add(cTree2_3);
+		componentList.add(listR2);
+		ArrayList<Component> listR3 = new ArrayList<Component>();
+		componentList.add(listR3);
+		ArrayList<Component> listR4 = new ArrayList<Component>();
+		componentList.add(listR4);
+		ArrayList<Component> listR5 = new ArrayList<Component>();
+		componentList.add(listR5);
+
+	}
+	public void remove_components(int roomNumber) {
+		for (int i = 0; i < componentList.get(roomNumber).size(); i++) {
+			mainGame.remove(componentList.get(roomNumber).get(i));
 		}
-		componentList.clear();
-		if (roomFile.equals("Room1")) {
-			System.out.println("Room 1 has been componentized");
-			GImage imgBed1 = new GImage("../Images/Top_Sprites/Comps/Bed.png");
-			mainGame.add(imgBed1, 110, 70); componentList.add(imgBed1);
-			GImage imgTable1 = new GImage("../Images/Top_Sprites/Comps/SideTable.gif");
-			mainGame.add(imgTable1, 140, 70); componentList.add(imgTable1);
-			GImage imgRug1 = new GImage("../Images/Top_Sprites/Comps/Rug_2.png");
-			mainGame.add(imgRug1, 60, 150); componentList.add(imgRug1);
-			System.out.println("POST Component list size 1: " + componentList.size());
+		//System.out.println(componentList);
+		mainGame.componentList.clear();
+	}
+	public void addComponents(int roomNumber) {
+		//System.out.println("PRE LOOP Component list size: " + componentList.get(roomNumber).size());
+		for (int i = 0; i < componentList.get(roomNumber).size(); i++) {
+			if (!componentList.get(roomNumber).get(i).above) {
+				mainGame.add(componentList.get(roomNumber).get(i), componentList.get(roomNumber).get(i).x,
+																   componentList.get(roomNumber).get(i).y);
+				mainGame.componentList.add(componentList.get(roomNumber).get(i));
+			}
 		}
-		else if (roomFile.equals("Room2")) {
-			System.out.println("Room 2 has been componentized");
-			GImage imgRug1 = new GImage("../Images/Top_Sprites/Comps/Rug_2_V.png");
-			mainGame.add(imgRug1, 160, 250); componentList.add(imgRug1);
-			GImage imgFenceV1 = new GImage("../Images/Top_Sprites/Comps/Fence_V.png");
-			mainGame.add(imgFenceV1, 355, 70); componentList.add(imgFenceV1);
-			GImage imgFenceV2 = new GImage("../Images/Top_Sprites/Comps/Fence_V.png");
-			mainGame.add(imgFenceV2, 355, 110); componentList.add(imgFenceV2);
-			GImage imgFenceV3 = new GImage("../Images/Top_Sprites/Comps/Fence_V.png");
-			mainGame.add(imgFenceV3, 355, 150); componentList.add(imgFenceV3);
-			GImage imgFenceV4 = new GImage("../Images/Top_Sprites/Comps/Fence_HLO.png");
-			mainGame.add(imgFenceV4, 355, 189); componentList.add(imgFenceV4);
-			GImage imgDoor2 = new GImage("../Images/Top_Sprites/Comps/Fence_HLO.png");
-			mainGame.add(imgDoor2, 355, 189); componentList.add(imgFenceV4);
-			System.out.println("POST Component list size 2: " + componentList.size());
+	}
+	public void add_above_components(int roomNumber) {
+		for (int i = 0; i < componentList.get(roomNumber).size(); i++) {
+			if (componentList.get(roomNumber).get(i).above) {
+				mainGame.add(componentList.get(roomNumber).get(i), componentList.get(roomNumber).get(i).x,
+																   componentList.get(roomNumber).get(i).y);
+				mainGame.componentList.add(componentList.get(roomNumber).get(i));
+			}
 		}
 	}
 }

@@ -6,18 +6,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
-import acm.graphics.GCanvas;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GOval;
-import acm.graphics.GPoint;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
 public class MainGUI extends GraphicsProgram implements Runnable {
 	SaveManager sm = new SaveManager();
 	Inventory inv = new Inventory();
-	MapLayout mapLayout = new MapLayout();
+	MapLayout mapLayout = new MapLayout(this);
 	EnemyList eL;
 	Room room;
 	AudioClip musicMenu = getAudioClip(getCodeBase(),"../Music/Main_Menu.wav"); 
@@ -69,13 +67,13 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	GImage imgTitle = new GImage("../Images/Extras/Infightity.png");
 	GImage imgBG = new GImage("../Images/Extras/MountainRange.png");
 	GImage imgPause = new GImage("../Images/Extras/Paused.png");
-	GImage shop1 = new GImage("../Images/Top_Sprites/Comps/Shop.png");
-	GImage shop2 = new GImage("../Images/Top_Sprites/Comps/Shop2.png");
+	GImage shop1 = new GImage("../Images/Top_Sprites/Comps/Shop1.gif");
+	GImage shop2 = new GImage("../Images/Top_Sprites/Comps/Shop2.gif");
 	ArrayList<ArrayList<Integer>> passableList = new ArrayList<ArrayList<Integer>>();
 
 	ArrayList<Attack> attackList = new ArrayList<Attack>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-	ArrayList<GImage> componentList = new ArrayList<GImage>();
+	ArrayList<Component> componentList = new ArrayList<Component>();
 	boolean paused = false;
 
 	int roomNumber = 1;
@@ -83,7 +81,9 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	boolean screenChanged = false;
 	boolean moveUp = false, moveDown = false, moveRight = false, moveLeft = false;
 	boolean notHeld = true;
-	
+	boolean roomLoaded = false;
+	boolean enteredCave = true;
+
 	GLabel glblEnemy;
 	GRect rectHRem, rectHBar;
 	GImage imgEnemy;
@@ -141,7 +141,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 
 		eL = new EnemyList();
 		eL.set_main(this);
-
+		musicMenu.loop();
 	}
 	public void enableButtons() {
 		btnINV.setEnabled(true);
@@ -150,34 +150,44 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		btnLS.setEnabled(true);
 	}
 	public void makeScreen(int roomNo) {
+		musicMenu.stop();
+		roomLoaded = false;
 		eL.setup_enemy_rooms();
 		remove(imgBG);
 		roomNumber = roomNo;
 		room = new Room();
 		room.setMain(this);
+		room.setUpComponents();
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 15; col++) {
 				tiles[row][col] = new Tile(40,40, 0);
 				add(tiles[row][col],  (col*40), (row*40) + 30);
 			}
 		}
-		room.makeRoom("Room"+roomNo, 2);
+		room.makeRoom("Room"+roomNumber, roomNumber, 2);
+		roomLoaded = true;
 		drawWeather(condition);
 	}
 	public void changeScreen(int roomNo) {
+		roomLoaded = false;
+		while(enemyList.size() > 0) {
+			remove(enemyList.get(0));
+			enemyList.remove(0);
+		}
+		enemyList.clear();
+		room.remove_components(roomNumber);
 		
 		roomNumber = roomNo;
-		room.makeRoom("Room"+roomNumber, 3);
+		room.makeRoom("Room"+roomNumber,roomNumber,  3);
 		if (spr != null) { 
 			double x = spr.getX(); 
 			double y = spr.getY();
 			remove(spr);
 			add(spr, x , y);
 			p.pX = 0; p.pY = 0; 
-			}
-		for (int i = 0; i < enemyList.size(); i++) {
-			remove(enemyList.get(i));
 		}
+		room.add_above_components(roomNumber);
+		roomLoaded = true;
 		insert_enemies();
 	}
 	public void setMap(ArrayList<ArrayList<Tile>> tilesP, ArrayList<ArrayList<Integer>> tileVals) {
@@ -279,6 +289,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 
 					}
 
+					checkComponents();
 					//p.pX = 0; p.pY = 0;	
 				}
 				revealBlock.move(1,0);
@@ -307,7 +318,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	public void setPlayer(Player plr) { 
 		System.out.println("PLAYER SET!"); 
 		p = plr; spr = new Sprite(p, this); 
-		add(spr, 50, 80);
+		add(spr, 490, 130);
 		new Thread(spr).start();		
 	}
 
@@ -348,11 +359,13 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		//System.out.println("Row: " + row + " Col: " + col);
 		//System.out.println(passableList.get(row).get(col));
 		//if (!tiles[row][col].canPass) return false;
-		if (row < 0 || row > 9) return true;
-		if (col < 0 || col > 14) return true;
+		if (!isPlayer) {
+			if (row < 0 || row > 9) return true;
+			if (col < 0 || col > 14) return true;
+		}
 		if (passableList.get(row).get(col) == 0) return false;
 		if (isPlayer) p.pX = 0; p.pY = 0;
-		
+
 		return true;
 	}
 	public void keyPressed(KeyEvent e) {
@@ -514,7 +527,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		}
 		weatherDrawn = true;
 	}
-	
+
 	public void insert_enemies() {
 		eL.setEnemyList(roomNumber);
 		for (int i = 0; i < eL.getEnemyList().size(); i++) {
@@ -522,74 +535,90 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			enemyList.add(eL.getEnemy(i));
 			add(eL.getEnemy(i), eL.getEnemy(i).x,  eL.getEnemy(i).y);
 		}
-		imgEnemy.setVisible(true);
-		glblEnemy.setVisible(true);
-		rectHRem.setVisible(true);
-		rectHBar.setVisible(true);
+		//imgEnemy.setVisible(true);
+		//glblEnemy.setVisible(true);
+		//rectHRem.setVisible(true);
+		//rectHBar.setVisible(true);
 	}
 	public boolean collision_Enemy(Enemy e) {
-		if (e.enemyID == 1) {
-			if (e.dir == 1) {
-				int ty2 = (int) (e.getY() - 2 - 30) / 40;
-				if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 13) / 40)) return false;
-				else {
-					return true;
+		if (e.dir == 1 && e.getY() <= 30) return true;
+		if (roomLoaded) {
+			if (e.enemyID == 1) {
+				if (e.dir == 1) {
+					int ty2 = (int) (e.getY() - 2 - 30 - 10) / 40;
+					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 13) / 40)) return false;
+					else {
+						return true;
+					}
+				}
+				else if (e.dir == 2) {
+					int tx2 = (int) (e.getX() + 15 + 2) / 40;
+					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
+					else {
+						return true;
+					}
+	
+				}
+				else if (e.dir == 3) {
+					int ty2 = (int) (e.getY() + 15 + 2 - 30) / 40;
+					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 13) / 40)) return false;
+					else {
+						return true;
+					}
+				}
+				else if (e.dir == 4) {
+					int tx2 = (int) (e.getX() - 2) / 40;
+					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
+					else {
+						return true;
+					}
 				}
 			}
-			else if (e.dir == 2) {
-				int tx2 = (int) (e.getX() + 15 + 2) / 40;
-				if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-				else {
-					return true;
+			else if (e.enemyID == 2) {
+				if (e.dir == 1) {
+					int ty2 = (int) (e.getY() - 1 - 30 - 10) / 40;
+					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 24) / 40)) return false;
+					else {
+						return true;
+					}
 				}
-				
-			}
-			else if (e.dir == 3) {
-				int ty2 = (int) (e.getY() + 15 + 2 - 30) / 40;
-				if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 13) / 40)) return false;
-				else {
-					return true;
+				else if (e.dir == 2) {
+					int tx2 = (int) (e.getX() + 25 + 1) / 40;
+					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
+					else {
+						return true;
+					}
+	
 				}
-			}
-			else if (e.dir == 4) {
-				int tx2 = (int) (e.getX() - 2) / 40;
-				if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-				else {
-					return true;
+				else if (e.dir == 3) {
+					int ty2 = (int) (e.getY() + 25 + 1 - 30) / 40;
+					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 24) / 40)) return false;
+					else {
+						return true;
+					}
 				}
-			}
-		}
-		else if (e.enemyID == 2) {
-			if (e.dir == 1) {
-				int ty2 = (int) (e.getY() - 1 - 30) / 40;
-				if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 24) / 40)) return false;
-				else {
-					return true;
-				}
-			}
-			else if (e.dir == 2) {
-				int tx2 = (int) (e.getX() + 25 + 1) / 40;
-				if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-				else {
-					return true;
-				}
-				
-			}
-			else if (e.dir == 3) {
-				int ty2 = (int) (e.getY() + 25 + 1 - 30) / 40;
-				if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 24) / 40)) return false;
-				else {
-					return true;
-				}
-			}
-			else if (e.dir == 4) {
-				int tx2 = (int) (e.getX() - 1) / 40;
-				if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-				else {
-					return true;
+				else if (e.dir == 4) {
+					int tx2 = (int) (e.getX() - 1) / 40;
+					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
+					else {
+						return true;
+					}
 				}
 			}
 		}
 		return true;
+	}
+
+	public void checkComponents() {
+		for (int comp = 0; comp < componentList.size(); comp++) {
+			Component c = componentList.get(comp);
+			if (c.interactable) {
+				if (c.getBounds().intersects(spr.getBounds())) {
+					c.altered = true;
+				}
+				else c.altered = false;
+				c.interact_with();
+			}
+		}
 	}
 }
