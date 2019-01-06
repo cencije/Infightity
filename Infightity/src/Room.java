@@ -37,17 +37,17 @@ public class Room {
 				String word = sc.next();
 				if (rowCounter % 15 == 0) row++;
 				rowCounter++;
-				if (word.equals("0")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 0)); }
-				else if (word.equals("1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 1)); }
-				else if (word.equals("2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 2)); }
-				else if (word.equals("3")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 3)); }
-				else if (word.equals("4")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 4)); }
-				else if (word.equals("5")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 5)); }
-				else if (word.equals("6")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 6)); }
-				else if (word.equals("7")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 7)); }
-				else if (word.equals("8")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 8)); }
-				else if (word.equals("9")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 9)); }
-				else if (word.equals("w")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 90)); }
+				if (word.equals("0")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 0));        }
+				else if (word.equals("1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 1));   }
+				else if (word.equals("2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 2));   }
+				else if (word.equals("3")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 3));   }
+				else if (word.equals("4")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 4));   } 
+				else if (word.equals("5")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 5));   }
+				else if (word.equals("6")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 6));   }
+				else if (word.equals("7")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 7));   }
+				else if (word.equals("8")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 8));   } 
+				else if (word.equals("9")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 9));   }
+				else if (word.equals("w")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 90));  }
 				else if (word.equals("-")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 100)); }
 				else if (word.equals("V")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 101)); }
 				else if (word.equals("H")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 102)); }
@@ -55,24 +55,34 @@ public class Room {
 				else if (word.equals("&")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 104)); }
 				else if (word.equals("*")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 105)); }
 				else if (word.equals("(")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 106)); }
-				else if (word.equals("g")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 21)); }
-				else if (word.equals("p")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 22)); }
-				else if (word.equals("P")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 23)); }
-				else if (word.equals("©")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 24)); }
-				else if (word.equals("†")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 25)); }
-				else if (word.equals("§")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 26)); }
-				else if (word.equals("¶")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 27)); }
-				else if (word.equals("•")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 28)); }
-				else if (word.equals("ª")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 29)); }
-				else if (word.equals("c")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 31)); }
-				else if (word.equals("™")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 32)); }
-				else if (word.equals("£")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 33)); }
-				else if (word.equals("¢")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 34)); }
-				else if (word.equals("∞")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 35)); }
-				else if (word.equals("œ")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 36)); }
-				else if (word.equals("´")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 37)); }
-				else if (word.equals("∑")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 38)); }
-				else if (word.equals("®")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 39)); }
+				else if (word.equals("g")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 21));  }
+				else if (word.equals("p")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 22));  }
+				else if (word.equals("P")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 23));  }
+				else if (word.equals("©")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 24));  }
+				else if (word.equals("†")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 25));  }
+				else if (word.equals("§")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 26));  }
+				else if (word.equals("¶")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 27));  }
+				else if (word.equals("•")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 28));  }
+				else if (word.equals("ª")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 29));  }
+				else if (word.equals("c")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 31));  }
+				else if (word.equals("™")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 32));  }
+				else if (word.equals("£")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 33));  }
+				else if (word.equals("¢")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 34));  }
+				else if (word.equals("∞")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 35));  }
+				else if (word.equals("œ")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 36));  }
+				else if (word.equals("´")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 37));  }
+				else if (word.equals("∑")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 38));  }
+				else if (word.equals("®")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 39));  }
+				else if (word.equals("ct")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 41)); }
+				else if (word.equals("cr")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 42)); }
+				else if (word.equals("cb")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 43)); }
+				else if (word.equals("cl")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 44)); }
+				else if (word.equals("ctl")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 46)); }
+				else if (word.equals("ctr")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 47)); }
+				else if (word.equals("cbl")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 48)); }
+				else if (word.equals("cbr")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 49)); }
+				
+				
 				else if (word.equals("f")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 301)); }
 				else if (word.equals("x")) { 
 					if (roomStyle == 1) {
@@ -142,6 +152,16 @@ public class Room {
 		componentList.add(listR4);
 		ArrayList<Component> listR5 = new ArrayList<Component>();
 		componentList.add(listR5);
+		ArrayList<Component> listR6 = new ArrayList<Component>();
+		componentList.add(listR6);
+		ArrayList<Component> listR7 = new ArrayList<Component>();
+		componentList.add(listR7);
+		ArrayList<Component> listR8 = new ArrayList<Component>();
+		componentList.add(listR8);
+		ArrayList<Component> listR9 = new ArrayList<Component>();
+		componentList.add(listR9);
+		ArrayList<Component> listR10 = new ArrayList<Component>();
+		componentList.add(listR10);
 
 	}
 	public void remove_components(int roomNumber) {

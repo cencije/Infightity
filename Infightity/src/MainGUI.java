@@ -318,7 +318,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	public void setPlayer(Player plr) { 
 		System.out.println("PLAYER SET!"); 
 		p = plr; spr = new Sprite(p, this); 
-		add(spr, 490, 130);
+		add(spr, 100, 130);
 		new Thread(spr).start();		
 	}
 

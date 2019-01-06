@@ -1,6 +1,6 @@
 ndajnd 7 1 8 2 9 3 10 8
 Gold 25
-Room 2
+Room 8
 Potions 1 0 17
 Weapons
 Key_Items

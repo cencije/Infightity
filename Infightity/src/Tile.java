@@ -32,7 +32,7 @@ public class Tile extends GCompound {
 		else if (type == 27)  img = new GImage("../Images/Top_Sprites/Tiles/Grass_6PTR.png");
 		else if (type == 28)  img = new GImage("../Images/Top_Sprites/Tiles/Grass_6PBL.png");
 		else if (type == 29)  img = new GImage("../Images/Top_Sprites/Tiles/Grass_6PBR.png");
-		else if (type == 31)  img = new GImage("../Images/Top_Sprites/Tiles/Grass_6.png"); 
+		else if (type == 31)  img = new GImage("../Images/Top_Sprites/Tiles/Cave_1.png"); 
 		else if (type == 32)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_Rock_T.png"); 
 		else if (type == 33)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_Rock_R.png"); 
 		else if (type == 34)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_Rock_B.png"); 
@@ -41,6 +41,15 @@ public class Tile extends GCompound {
 		else if (type == 37)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_Rock_TRC.png"); 
 		else if (type == 38)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_Rock_BLC.png"); 
 		else if (type == 39)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_Rock_BRC.png"); 
+		else if (type == 41)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_T_G.png"); 
+		else if (type == 42)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_R_G.png"); 
+		else if (type == 43)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_B_G.png"); 
+		else if (type == 44)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_L_G.png"); 
+		else if (type == 45)  { }
+		else if (type == 46)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_TLC_G.png"); 
+		else if (type == 47)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_TRC_G.png"); 
+		else if (type == 48)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_BLC_G.png"); 
+		else if (type == 49)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_BRC_G.png"); 
 		else if (type == 51)  img = new GImage("../Images/Top_Sprites/Tiles/Snow_0.png");
 		else if (type == 52)  img = new GImage("../Images/Top_Sprites/Tiles/Snow_1.png");
 		else if (type == 90)  img = new GImage("../Images/Top_Sprites/Tiles/Water_1.gif");
@@ -78,7 +87,7 @@ public class Tile extends GCompound {
 		else if (type == 27)  { img.setImage("../Images/Top_Sprites/Tiles/Grass_6PTR.png"); }
 		else if (type == 28)  { img.setImage("../Images/Top_Sprites/Tiles/Grass_6PBL.png"); }
 		else if (type == 29)  { img.setImage("../Images/Top_Sprites/Tiles/Grass_6PBR.png"); }
-		else if (type == 31)  { img.setImage("../Images/Top_Sprites/Tiles/Grass_6.png"); }
+		else if (type == 31)  { img.setImage("../Images/Top_Sprites/Tiles/Cave_1.png"); }
 		else if (type == 32)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_T.png"); }
 		else if (type == 33)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_R.png"); }
 		else if (type == 34)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_B.png"); }
@@ -87,6 +96,15 @@ public class Tile extends GCompound {
 		else if (type == 37)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_TRC.png"); }
 		else if (type == 38)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_BLC.png"); }
 		else if (type == 39)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_BRC.png"); }
+		else if (type == 41)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_T_G.png"); }
+		else if (type == 42)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_R_G.png"); }
+		else if (type == 43)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_B_G.png"); }
+		else if (type == 44)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_L_G.png"); }
+		else if (type == 45)  { }
+		else if (type == 46)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_TLC_G.png"); }
+		else if (type == 47)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_TRC_G.png"); }
+		else if (type == 48)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_BLC_G.png"); }
+		else if (type == 49)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_BRC_G.png"); }
 		else if (type == 51)  { img.setImage("../Images/Top_Sprites/Tiles/Snow_0.png"); }
 		else if (type == 52)  { img.setImage("../Images/Top_Sprites/Tiles/Snow_1.png"); }
 		else if (type == 90)  { img.setImage("../Images/Top_Sprites/Tiles/Water_1.gif"); }

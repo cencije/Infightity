@@ -75,8 +75,28 @@ public class EnemyList {
     	ArrayList<ArrayList<CoordinatePair>> room5List = new ArrayList<ArrayList<CoordinatePair>>();
     	ArrayList<CoordinatePair> r5Morp = new ArrayList<CoordinatePair>();
     	r5Morp.add(new CoordinatePair(150, 150, 1)); r5Morp.add(new CoordinatePair(200, 200, 1));
-    	room5List.add(r4Morp);
+    	room5List.add(r5Morp);
     	enemyArrayList.add(room5List);
+    	ArrayList<ArrayList<CoordinatePair>> room6List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r6Morp = new ArrayList<CoordinatePair>();
+    	room6List.add(r6Morp);
+    	enemyArrayList.add(room6List);
+    	ArrayList<ArrayList<CoordinatePair>> room7List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r7Morp = new ArrayList<CoordinatePair>();
+    	room7List.add(r7Morp);
+    	enemyArrayList.add(room7List);
+    	ArrayList<ArrayList<CoordinatePair>> room8List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r8Morp = new ArrayList<CoordinatePair>();
+    	room8List.add(r8Morp);
+    	enemyArrayList.add(room7List);
+    	ArrayList<ArrayList<CoordinatePair>> room9List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r9Morp = new ArrayList<CoordinatePair>();
+    	room9List.add(r9Morp);
+    	enemyArrayList.add(room9List);
+    	ArrayList<ArrayList<CoordinatePair>> room10List = new ArrayList<ArrayList<CoordinatePair>>();
+    	ArrayList<CoordinatePair> r10Morp = new ArrayList<CoordinatePair>();
+    	room10List.add(r10Morp);
+    	enemyArrayList.add(room10List);
     	
     }
     public void make_current_enemies(int morp, int peasants, int archers, int spearmen) {
