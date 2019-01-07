@@ -50,6 +50,10 @@ public class Tile extends GCompound {
 		else if (type == 47)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_TRC_G.png"); 
 		else if (type == 48)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_BLC_G.png"); 
 		else if (type == 49)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_BRC_G.png"); 
+		else if (type == 56)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_TLCI_G.png"); 
+		else if (type == 57)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_TRCI_G.png"); 
+		else if (type == 58)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_BLCI_G.png"); 
+		else if (type == 59)  img = new GImage("../Images/Top_Sprites/Tiles/Cliff_BRCI_G.png"); 
 		else if (type == 51)  img = new GImage("../Images/Top_Sprites/Tiles/Snow_0.png");
 		else if (type == 52)  img = new GImage("../Images/Top_Sprites/Tiles/Snow_1.png");
 		else if (type == 90)  img = new GImage("../Images/Top_Sprites/Tiles/Water_1.gif");
@@ -61,6 +65,10 @@ public class Tile extends GCompound {
 		else if (type == 105)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPCBL.png");
 		else if (type == 106)  img = new GImage("../Images/Top_Sprites/Tiles/Wall_WPCBR.png");
 		else if (type == 301)  img = new GImage("../Images/Top_Sprites/Tiles/Cropland.png");
+		else if (type == 331)  img = new GImage("../Images/Top_Sprites/Tiles/Cave_1.png");
+		else if (type == 332)  img = new GImage("../Images/Top_Sprites/Tiles/Cave_2.png");
+		else if (type == 333)  img = new GImage("../Images/Top_Sprites/Tiles/Cave_3.png");
+		else if (type == 334)  img = new GImage("../Images/Top_Sprites/Tiles/Cave_4.png");
 		width = x; height = y;
 		img.setSize(width, height);
 		add(img);
@@ -87,7 +95,7 @@ public class Tile extends GCompound {
 		else if (type == 27)  { img.setImage("../Images/Top_Sprites/Tiles/Grass_6PTR.png"); }
 		else if (type == 28)  { img.setImage("../Images/Top_Sprites/Tiles/Grass_6PBL.png"); }
 		else if (type == 29)  { img.setImage("../Images/Top_Sprites/Tiles/Grass_6PBR.png"); }
-		else if (type == 31)  { img.setImage("../Images/Top_Sprites/Tiles/Cave_1.png"); }
+		else if (type == 31)  {  }
 		else if (type == 32)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_T.png"); }
 		else if (type == 33)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_R.png"); }
 		else if (type == 34)  { img.setImage("../Images/Top_Sprites/Tiles/Wall_Rock_B.png"); }
@@ -105,6 +113,10 @@ public class Tile extends GCompound {
 		else if (type == 47)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_TRC_G.png"); }
 		else if (type == 48)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_BLC_G.png"); }
 		else if (type == 49)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_BRC_G.png"); }
+		else if (type == 56)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_TLCI_G.png"); }
+		else if (type == 57)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_TRCI_G.png"); }
+		else if (type == 58)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_BLCI_G.png"); }
+		else if (type == 59)  { img.setImage("../Images/Top_Sprites/Tiles/Cliff_BRCI_G.png"); }
 		else if (type == 51)  { img.setImage("../Images/Top_Sprites/Tiles/Snow_0.png"); }
 		else if (type == 52)  { img.setImage("../Images/Top_Sprites/Tiles/Snow_1.png"); }
 		else if (type == 90)  { img.setImage("../Images/Top_Sprites/Tiles/Water_1.gif"); }
@@ -116,6 +128,10 @@ public class Tile extends GCompound {
 		else if (type == 105) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPCBL.png"); }
 		else if (type == 106) { img.setImage("../Images/Top_Sprites/Tiles/Wall_WPCBR.png"); }
 		else if (type == 301) { img.setImage("../Images/Top_Sprites/Tiles/Cropland.png"); }
+		else if (type == 331) { img.setImage("../Images/Top_Sprites/Tiles/Cave_1.png"); }
+		else if (type == 332) { img.setImage("../Images/Top_Sprites/Tiles/Cave_2.png"); }
+		else if (type == 333) { img.setImage("../Images/Top_Sprites/Tiles/Cave_3.png"); }
+		else if (type == 334) { img.setImage("../Images/Top_Sprites/Tiles/Cave_4.png"); }
 
 	}
 }

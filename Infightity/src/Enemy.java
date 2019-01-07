@@ -36,19 +36,17 @@ public class Enemy extends GCompound implements Runnable {
     public void setAttackMax(int attackMax){this.attackMax = attackMax;}
     public void setCritPoint() {this.critPoint = true;}
     
-    public Enemy(int listID, int enemyID, MainGUI mainGUI) {
+    public Enemy(int listID, int enemyID, int dir, MainGUI mainGUI) {
     	rand = new Random();
     	id = listID;
+    	this.dir = dir;
     	this.mainGUI = mainGUI;
     	this.enemyID = enemyID;
     	if (enemyID == 1) {
-    		int dirStart = rand.nextInt(2);
-    		if (dirStart == 0) {
-    			imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_R.gif");
-    			xMove = 1; yMove = 0; dir = 2;
-    		}
-    		else { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_U.gif"); xMove = 0; yMove = -1; dir = 1;}
-    		
+    		if (dir == 1)      { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_U.gif"); xMove = 0; yMove = -1; }
+    		else if (dir == 2) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_R.gif"); xMove = 1; yMove = 0; }
+    		else if (dir == 3) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_D.gif"); xMove = 0; yMove = 1; }
+    		else if (dir == 4) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_L.gif"); xMove = -1; yMove = 0; }
     		imgProfile = new GImage("../Images/Enemy_Sprites/E1_Morp.gif");
     	}
     	if (enemyID == 2) {

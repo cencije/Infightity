@@ -115,6 +115,9 @@ public class Component extends GCompound implements Runnable {
 		else if (id == 302) {
 			imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_H_T1.png");
 		}
+		else if (id == 303) {
+			imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_V2.png");
+		}
 		else if (id == 401) {
 			imgTop = new GImage("../Images/Top_Sprites/Comps/Tree1_G.png");
 		}

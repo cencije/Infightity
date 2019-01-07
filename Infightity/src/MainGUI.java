@@ -166,6 +166,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		}
 		room.makeRoom("Room"+roomNumber, roomNumber, 2);
 		roomLoaded = true;
+		insert_enemies();
 		drawWeather(condition);
 	}
 	public void changeScreen(int roomNo) {
@@ -284,7 +285,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 					}
 					if (spr.getY() + 25 > 415) {
 						tfEventArea.setText("Moved Down!");
-						spr.setLocation(spr.getX(), 90);
+						spr.setLocation(spr.getX(), 80);
 						changeScreen(mapLayout.getRoom(roomNumber, 3));
 
 					}

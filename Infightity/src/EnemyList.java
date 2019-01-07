@@ -24,28 +24,28 @@ public class EnemyList {
     public void setEnemyList(MainGUI mainGUI)
     {
     	
-        enemy1 = new Enemy(1000, 1, mainGUI);
+        enemy1 = new Enemy(1000, 1, 1, mainGUI);
         enemy1.name = "Morp";
         enemy1.setArmor(0);
         enemy1.setAttackMax(1);
         enemy1.setAttackMin(0);
         enemy1.setCritPoint();
 
-        enemy2 = new Enemy(1000, 2, mainGUI);
+        enemy2 = new Enemy(1000, 2, 1, mainGUI);
         enemy2.name = "Peasant";
         enemy2.setArmor(2);
         enemy2.setAttackMax(7);
         enemy2.setAttackMin(1);
         enemy2.setCritPoint();
 
-        enemy3 = new Enemy(1000, 3, mainGUI);
+        enemy3 = new Enemy(1000, 3, 1, mainGUI);
         enemy3.name = "Archer";
         enemy3.setArmor(5);
         enemy3.setAttackMax(10);
         enemy3.setAttackMin(1);
         enemy3.setCritPoint();
         
-        enemy4 = new Enemy(1000, 4, mainGUI);
+        enemy4 = new Enemy(1000, 4, 1, mainGUI);
         enemy4.name = "Spearman";
         enemy4.setArmor(10);
         enemy4.setAttackMax(10);
@@ -69,7 +69,8 @@ public class EnemyList {
     	enemyArrayList.add(room3List);
     	ArrayList<ArrayList<CoordinatePair>> room4List = new ArrayList<ArrayList<CoordinatePair>>();
     	ArrayList<CoordinatePair> r4Morp = new ArrayList<CoordinatePair>();
-    	r4Morp.add(new CoordinatePair(150, 150, 1)); r4Morp.add(new CoordinatePair(200, 200, 1));
+    	r4Morp.add(new CoordinatePair(150, 150, 1)); r4Morp.add(new CoordinatePair(310, 280, 2));
+    	r4Morp.add(new CoordinatePair(250, 170, 3)); r4Morp.add(new CoordinatePair(455, 170, 1));
     	room4List.add(r4Morp);
     	enemyArrayList.add(room4List);
     	ArrayList<ArrayList<CoordinatePair>> room5List = new ArrayList<ArrayList<CoordinatePair>>();
@@ -102,7 +103,7 @@ public class EnemyList {
     public void make_current_enemies(int morp, int peasants, int archers, int spearmen) {
     	
     	for (int m = 0; m < morp; m++) {
-    		Enemy e = new Enemy(m, 1, mainGUI);
+    		Enemy e = new Enemy(m, 1, 1, mainGUI);
     		e.name = "Morp";
     		e.setHealth(10, 10);
     		e.setArmor(0);
@@ -112,7 +113,7 @@ public class EnemyList {
     		enemyListCurrent.add(e);
     	}
     	for (int p = 0; p < peasants; p++) {
-    		Enemy e = new Enemy(p, 2, mainGUI);
+    		Enemy e = new Enemy(p, 2, 1, mainGUI);
     		e.name = "Peasant";
     		e.setHealth(10, 10);
     		e.setArmor(1);
@@ -122,7 +123,7 @@ public class EnemyList {
     		enemyListCurrent.add(e);
     	}
     	for (int a = 0; a < archers; a++) {
-    		Enemy e = new Enemy(a, 2, mainGUI);
+    		Enemy e = new Enemy(a, 2, 1, mainGUI);
     		e.name = "Archer";
     		e.setHealth(10, 10);
     		e.setArmor(1);
@@ -142,7 +143,7 @@ public class EnemyList {
     	ArrayList<ArrayList<CoordinatePair>> listCurrentRoom = enemyArrayList.get(roomNumber);
     	for (int i = 0; i < listCurrentRoom.size(); i++) {
     		for (int j = 0; j < listCurrentRoom.get(i).size(); j++) {
-    			Enemy e = new Enemy(enemyNumber, j+1, mainGUI);
+    			Enemy e = new Enemy(enemyNumber, i+1, listCurrentRoom.get(i).get(j).dir, mainGUI);
     			enemyNumber++;
     			enemyListCurrent.add(e);
     			e.x = listCurrentRoom.get(i).get(j).x;
