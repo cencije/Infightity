@@ -20,7 +20,7 @@ public class Enemy extends GCompound implements Runnable {
     int healthTotal, healthCurrent, armor;
     int attackMin, attackMax;
     int level = 1;
-    boolean critPoint = false, isDead = false;
+    boolean critPoint = false, isDead = false, paused = false;
 
     int x, y;
     int xMove, yMove;
@@ -95,17 +95,22 @@ public class Enemy extends GCompound implements Runnable {
 
     public void run() {
     	while (!isDead) {
-    		pause(DELAY);
-    		move(xMove,yMove);
-    		if (mainGUI.collision_Enemy(this)) {
-    			if (enemyID == 1 || enemyID == 2) {
-    				xMove = xMove * -1; yMove = yMove * -1;
-    				if (dir == 1)      { dir = 3; } 
-    				else if (dir == 2) { dir = 4; }
-    				else if (dir == 3) { dir = 1; } 
-    				else if (dir == 4) { dir = 2; }
-    				changeSprite(dir);
-    			}
+    		if (!paused) {
+	    		pause(DELAY);
+	    		move(xMove,yMove);
+	    		if (mainGUI.collision_Enemy(this)) {
+	    			if (enemyID == 1 || enemyID == 2) {
+	    				xMove = xMove * -1; yMove = yMove * -1;
+	    				if (dir == 1)      { dir = 3; } 
+	    				else if (dir == 2) { dir = 4; }
+	    				else if (dir == 3) { dir = 1; } 
+	    				else if (dir == 4) { dir = 2; }
+	    				changeSprite(dir);
+	    			}
+	    		}
+    		}
+    		else {
+    			pause(DELAY);
     		}
     	}
     	showDead();

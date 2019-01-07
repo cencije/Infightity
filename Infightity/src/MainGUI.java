@@ -396,8 +396,16 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			break;
 		}
 		case KeyEvent.VK_P: {
-			if (paused) { remove(imgPause); paused = false;  btnSG.setEnabled(false); }
-			else { add(imgPause, 40, 200); paused = true; btnSG.setEnabled(true); }
+			if (paused) { remove(imgPause); paused = false;  btnSG.setEnabled(false); 
+			for (int i = 0; i < enemyList.size(); i++) {
+				enemyList.get(i).paused = false;
+			}}
+			else { 
+				add(imgPause, 40, 200); paused = true; btnSG.setEnabled(true); 
+				for (int i = 0; i < enemyList.size(); i++) {
+					enemyList.get(i).paused = true;
+				}
+			}
 			break;
 		}
 		case KeyEvent.VK_SPACE: {
