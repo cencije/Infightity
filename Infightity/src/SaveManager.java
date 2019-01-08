@@ -140,19 +140,19 @@ public class SaveManager extends JPanel implements ActionListener {
 
 	public void setLists() {
 		charList.clear();
-		charList.add(new ImageIcon("../Images/Player_Sprites/Archer1.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Archer2.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Archer3.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Spearman1.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Spearman2.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Spearman3.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Wizard1.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Wizard2.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Wizard3.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Knight1.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Knight2.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Knight3.png"));
-		charList.add(new ImageIcon("../Images/Player_Sprites/Skeleton1.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Archer1.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Archer2.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Archer3.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Spearman1.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Spearman2.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Spearman3.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Wizard1.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Wizard2.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Wizard3.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Knight1.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Knight2.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Knight3.png"));
+		charList.add(new ImageIcon("../Images/Profiles/Player/Skeleton1.png"));
 		spearmanList.clear();
 		spearmanList.add(9); spearmanList.add(8); spearmanList.add(4);
 		spearmanList.add(7); spearmanList.add(5); spearmanList.add(7);
@@ -267,8 +267,8 @@ public class SaveManager extends JPanel implements ActionListener {
 			mainGame.enableButtons();
 		}
 		if (evt.getActionCommand().equals("Cancel")) {
-			if (loadFrame.isVisible()) loadFrame.dispose();
-			if (saveFrame.isVisible()) saveFrame.dispose();
+			//if (loadFrame.isVisible()) loadFrame.dispose();
+			//if (saveFrame.isVisible()) saveFrame.dispose();
 		}
 		if (evt.getActionCommand().equals("Create")) {
 			String typedName = tfName.getText();

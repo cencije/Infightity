@@ -47,7 +47,7 @@ public class Enemy extends GCompound implements Runnable {
     		else if (dir == 2) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_R.gif"); xMove = 1; yMove = 0; }
     		else if (dir == 3) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_D.gif"); xMove = 0; yMove = 1; }
     		else if (dir == 4) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_L.gif"); xMove = -1; yMove = 0; }
-    		imgProfile = new GImage("../Images/Enemy_Sprites/E1_Morp.gif");
+    		imgProfile = new GImage("../Images/Profiles/Enemy/E1_Morp.gif");
     	}
     	if (enemyID == 2) {
     		int dirStart = rand.nextInt(4) + 1;
@@ -57,15 +57,15 @@ public class Enemy extends GCompound implements Runnable {
     		else if (dir == 3) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Peasant_D.gif"); xMove = 0; yMove = 2; }
     		else if (dir == 4) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Peasant_L.gif"); xMove = -2; yMove = 0; }
     		
-    		imgProfile = new GImage("../Images/Enemy_Sprites/E2_Peasant.png");
+    		imgProfile = new GImage("../Images/Profiles/Enemy/E2_Peasant.png");
     	}
     	if (enemyID == 4) {
     		imgTop = new GImage("../Images/Top_Sprites/Enemy/WizE_Down");
-    		imgProfile = new GImage("../Images/Enemy_Sprites/E4_Wizard.png");
+    		imgProfile = new GImage("../Images/Profiles/Enemy/E4_Wizard.png");
     	}
     	else if (enemyID == 9) {
     		imgTop = new GImage("../Images/Top_Sprites/Enemy/BBones_D");
-    		imgProfile = new GImage("../Images/Enemy_Sprites/E9_BloodyBones.png");
+    		imgProfile = new GImage("../Images/Profiles/Enemy/E9_BloodyBones.png");
     		setHealth(10,10); setArmor(0);
     		setAttackMin(1); setAttackMax(5);
     	}

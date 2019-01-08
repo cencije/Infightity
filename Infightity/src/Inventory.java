@@ -49,19 +49,19 @@ public class Inventory extends JPanel implements ActionListener {
 		mainFrame.setTitle("Inventory");
  	    
  	    
-		if (charClass == 0) imgPlayer = new ImageIcon("../Images/Player_Sprites/Archer1.png");
-		if (charClass == 1) imgPlayer = new ImageIcon("../Images/Player_Sprites/Archer2.png");
-		if (charClass == 2) imgPlayer = new ImageIcon("../Images/Player_Sprites/Archer3.png");
-		if (charClass == 3) imgPlayer = new ImageIcon("../Images/Player_Sprites/Spearman1.png");
-		if (charClass == 4) imgPlayer = new ImageIcon("../Images/Player_Sprites/Spearman2.png");
-		if (charClass == 5) imgPlayer = new ImageIcon("../Images/Player_Sprites/Spearman3.png");
-		if (charClass == 6) imgPlayer = new ImageIcon("../Images/Player_Sprites/Wizard1.png");
-		if (charClass == 7) imgPlayer = new ImageIcon("../Images/Player_Sprites/Wizard2.png");
-		if (charClass == 8) imgPlayer = new ImageIcon("../Images/Player_Sprites/Wizard3.png");
-		if (charClass == 9) imgPlayer = new ImageIcon("../Images/Player_Sprites/Knight1.png");
-		if (charClass == 10) imgPlayer = new ImageIcon("../Images/Player_Sprites/Knight2.png");
-		if (charClass == 11) imgPlayer = new ImageIcon("../Images/Player_Sprites/Knight3.png");
-		if (charClass == 12) imgPlayer = new ImageIcon("../Images/Player_Sprites/Skeleton1.png");
+		if (charClass == 0) imgPlayer = new ImageIcon("../Images/Profiles/Player/Archer1.png");
+		if (charClass == 1) imgPlayer = new ImageIcon("../Images/Profiles/Player/Archer2.png");
+		if (charClass == 2) imgPlayer = new ImageIcon("../Images/Profiles/Player/Archer3.png");
+		if (charClass == 3) imgPlayer = new ImageIcon("../Images/Profiles/Player/Spearman1.png");
+		if (charClass == 4) imgPlayer = new ImageIcon("../Images/Profiles/Player/Spearman2.png");
+		if (charClass == 5) imgPlayer = new ImageIcon("../Images/Profiles/Player/Spearman3.png");
+		if (charClass == 6) imgPlayer = new ImageIcon("../Images/Profiles/Player/Wizard1.png");
+		if (charClass == 7) imgPlayer = new ImageIcon("../Images/Profiles/Player/Wizard2.png");
+		if (charClass == 8) imgPlayer = new ImageIcon("../Images/Profiles/Player/Wizard3.png");
+		if (charClass == 9) imgPlayer = new ImageIcon("../Images/Profiles/Player/Knight1.png");
+		if (charClass == 10) imgPlayer = new ImageIcon("../Images/Profiles/Player/Knight2.png");
+		if (charClass == 11) imgPlayer = new ImageIcon("../Images/Profiles/Player/Knight3.png");
+		if (charClass == 12) imgPlayer = new ImageIcon("../Images/Profiles/Player/Skeleton1.png");
 		JLabel lblTitle = new JLabel("Current Inventory"); lblTitle.setBounds((width/2) - 57, 5, 130, 20); 
 		lblTitle.setFont(fHead);  lblTitle.setForeground(Color.WHITE); mainFrame.add(lblTitle);
  	    lblChar = new JLabel(imgPlayer); lblChar.setBounds(1, 1, 80, 80); mainFrame.add(lblChar);

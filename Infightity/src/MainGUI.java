@@ -123,7 +123,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 
 		rectProfile = new GRect(510,441,85,85); rectProfile.setFilled(true); rectProfile.setFillColor(menuColor); 
 		rectProfile.setColor(Color.WHITE); add(rectProfile);
-		imgEnemy = new GImage("../Images/Enemy_Sprites/E1_Morp.gif"); imgEnemy.setVisible(false);
+		imgEnemy = new GImage(""); imgEnemy.setVisible(false);
 		add(imgEnemy, 512, 445);
 		glblEnemy = new GLabel("Morp", 552, 541);
 		glblEnemy.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -264,28 +264,29 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 					}
 					//System.out.println("X: " + spr.getX() + " Y: " + spr.getY());
 					spr.move(p.pX, p.pY);
-
-					if (spr.getX() < 20) {
+					double xVal = spr.getX();
+					double yVal = spr.getY();
+					if (xVal < 20) {
 						tfEventArea.setText("Moved Left!");
-						spr.setLocation(525, spr.getY());
+						spr.setLocation(525, yVal);
 						changeScreen(mapLayout.getRoom(roomNumber, 4));
 
 					}
-					if (spr.getX() + 25 > 575) {
+					if (xVal + 25 > 575) {
 						tfEventArea.setText("Moved Right!");
-						spr.setLocation(50, spr.getY());
+						spr.setLocation(50, yVal);
 						changeScreen(mapLayout.getRoom(roomNumber, 2));
 
 					}
-					if (spr.getY() < 50) {
+					if (yVal < 50) {
 						tfEventArea.setText("Moved Up!");
-						spr.setLocation(spr.getX(), 380);
+						spr.setLocation(xVal, 380);
 						changeScreen(mapLayout.getRoom(roomNumber, 1));
 
 					}
-					if (spr.getY() + 25 > 415) {
+					if (yVal + 25 > 415) {
 						tfEventArea.setText("Moved Down!");
-						spr.setLocation(spr.getX(), 80);
+						spr.setLocation(xVal, 80);
 						changeScreen(mapLayout.getRoom(roomNumber, 3));
 
 					}
