@@ -286,7 +286,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 					}
 					if (yVal + 25 > 415) {
 						tfEventArea.setText("Moved Down!");
-						spr.setLocation(xVal, 80);
+						spr.setLocation(xVal, 60);
 						changeScreen(mapLayout.getRoom(roomNumber, 3));
 
 					}
@@ -320,7 +320,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	public void setPlayer(Player plr) { 
 		System.out.println("PLAYER SET!"); 
 		p = plr; spr = new Sprite(p, this); 
-		add(spr, 100, 130);
+		add(spr, 50, 80);
 		new Thread(spr).start();		
 	}
 

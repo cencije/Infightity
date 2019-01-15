@@ -29,104 +29,60 @@ public class Component extends GCompound implements Runnable {
 			//sfx = getAudioClip(getCodeBase(),"../Sounds/Door_Sfx.wav"); 
 		}
 		else if (id == 2) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Door_RC.png");
-		}
+			imgTop = new GImage("../Images/Top_Sprites/Comps/Door_RC.png");}
 		else if (id == 3) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Door_DC.png");
-		}
+			imgTop = new GImage("../Images/Top_Sprites/Comps/Door_DC.png");}
 		else if (id == 4) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Door_LC.png");
-		}
-		else if (id == 5) {
-
-		}
-		else if (id == 6) {
-
-		}
-		else if (id == 7) {
-
-		}
-		else if (id == 8) {
-
-		}
-		else if (id == 9) {
-
-		}
-		else if (id == 10) {
-
-		}
-		else if (id == 11) {
-
-		}
-		else if (id == 12) {
-
-		}
-		else if (id == 13) {
-
-		}
-		else if (id == 14) {
-
-		}
-		else if (id == 15) {
-
-		}
-		else if (id == 201) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Bed.png");
-		}
-		else if (id == 202) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/SideTable.gif");
-		}
-		else if (id == 250) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_1.png");
-		}
-		else if (id == 251) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_1_V.png");
-		}
-		else if (id == 252) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_2.png");
-		}
-		else if (id == 253) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_2_V.png");
-		}
-		else if (id == 254) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_3.png");
-		}
-		else if (id == 255) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_3_V.png");
-		}
-		else if (id == 256) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_4.png");
-		}
-		else if (id == 257) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_4_V.png");
-		}
-		else if (id == 258) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_5.png");
-		}
-		else if (id == 259) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_5_V.png");
-		}
-		else if (id == 300) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_V.png");
-		}
-		else if (id == 301) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_V_T1.png");
-		}
-		else if (id == 302) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_H_T1.png");
-		}
-		else if (id == 303) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_V2.png");
-		}
-		else if (id == 401) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Tree1_G.png");
-		}
-		else if (id == 402) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Tree2_G.png");
-		}
-		else if (id == 403) {
-			imgTop = new GImage("../Images/Top_Sprites/Comps/Tree3_G.png");
-		}
+			imgTop = new GImage("../Images/Top_Sprites/Comps/Door_LC.png");}
+		else if (id == 5) { }
+		else if (id == 6) { }
+		else if (id == 7) { }
+		else if (id == 8) { }
+		else if (id == 9) { }
+		else if (id == 10) { }
+		else if (id == 11) { }
+		else if (id == 12) { }
+		else if (id == 13) { }
+		else if (id == 14) { }
+		else if (id == 15) { }
+		else if (id == 201) { imgTop = new GImage("../Images/Top_Sprites/Comps/Bed.png"); }
+		else if (id == 202) { imgTop = new GImage("../Images/Top_Sprites/Comps/SideTable.gif"); }
+		else if (id == 203) { imgTop = new GImage("../Images/Top_Sprites/Comps/Barstool.png"); }
+		else if (id == 204) { imgTop = new GImage("../Images/Top_Sprites/Comps/Chair_U.png"); }
+		else if (id == 205) { imgTop = new GImage("../Images/Top_Sprites/Comps/Chair_R.png"); }
+		else if (id == 206) { imgTop = new GImage("../Images/Top_Sprites/Comps/Chair_D.png"); }
+		else if (id == 207) { imgTop = new GImage("../Images/Top_Sprites/Comps/Chair_L.png"); }
+		else if (id == 208) { imgTop = new GImage("../Images/Top_Sprites/Comps/Table_1.png"); }
+		else if (id == 209) { imgTop = new GImage("../Images/Top_Sprites/Comps/Table_2.png"); }
+		else if (id == 210) { imgTop = new GImage("../Images/Top_Sprites/Comps/Table_3.png"); }
+		else if (id == 211) { imgTop = new GImage("../Images/Top_Sprites/Comps/Table_4.png"); }
+		else if (id == 212) { imgTop = new GImage("../Images/Top_Sprites/Comps/Table_5.png"); }
+		else if (id == 213) { imgTop = new GImage("../Images/Top_Sprites/Comps/Table_6.png"); }
+		else if (id == 214) { imgTop = new GImage("../Images/Top_Sprites/Comps/Table_7.png"); }
+		else if (id == 215) { imgTop = new GImage("../Images/Top_Sprites/Comps/H_Moose_U.png"); }
+		else if (id == 216) { imgTop = new GImage("../Images/Top_Sprites/Comps/H_Moose_R.png"); }
+		else if (id == 217) { imgTop = new GImage("../Images/Top_Sprites/Comps/H_Moose_D.png"); }
+		else if (id == 218) { imgTop = new GImage("../Images/Top_Sprites/Comps/H_Moose_L.png"); }
+		else if (id == 219) { imgTop = new GImage("../Images/Top_Sprites/Comps/BarRack.png"); }
+		
+		
+		else if (id == 250) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_1.png"); }
+		else if (id == 251) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_1_V.png"); }
+		else if (id == 252) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_2.png"); }
+		else if (id == 253) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_2_V.png"); }
+		else if (id == 254) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_3.png"); }
+		else if (id == 255) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_3_V.png"); }
+		else if (id == 256) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_4.png"); }
+		else if (id == 257) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_4_V.png"); }
+		else if (id == 258) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_5.png"); }
+		else if (id == 259) { imgTop = new GImage("../Images/Top_Sprites/Comps/Rug_5_V.png"); }
+		else if (id == 300) { imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_V.png"); }
+		else if (id == 301) { imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_V_T1.png"); }
+		else if (id == 302) { imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_H_T1.png"); }
+		else if (id == 303) { imgTop = new GImage("../Images/Top_Sprites/Comps/Fence_V2.png"); }
+		else if (id == 401) { imgTop = new GImage("../Images/Top_Sprites/Comps/Tree1_G.png"); }
+		else if (id == 402) { imgTop = new GImage("../Images/Top_Sprites/Comps/Tree2_G.png"); }
+		else if (id == 403) { imgTop = new GImage("../Images/Top_Sprites/Comps/Tree3_G.png"); }
 		add(imgTop);
 	}
 	public void interact_with() {

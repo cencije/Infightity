@@ -88,6 +88,24 @@ public class Room {
 				else if (word.equals("ctri")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 57)); }
 				else if (word.equals("cbli")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 58)); }
 				else if (word.equals("cbri")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 59)); }
+				else if (word.equals("-1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 107)); }
+				else if (word.equals("-2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 108)); }
+				else if (word.equals("-3")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 109)); }
+				else if (word.equals("-tl1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 110)); }
+				else if (word.equals("-tl2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 111)); }
+				else if (word.equals("-tr1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 112)); }
+				else if (word.equals("-tr2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 113)); }
+				else if (word.equals("-bl1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 114)); }
+				else if (word.equals("-bl2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 115)); }
+				else if (word.equals("-br1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 116)); }
+				else if (word.equals("-br2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 117)); }
+				else if (word.equals("tab1")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 118)); }
+				else if (word.equals("tab2")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 119)); }
+				else if (word.equals("tab3")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 120)); }
+				else if (word.equals("tab4")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 121)); }
+				else if (word.equals("tab5")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 122)); }
+				else if (word.equals("tab6")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 123)); }
+				else if (word.equals("tab7")) { collisionVals.get(row).add(1); tilePieces.get(row).add(new Tile (40,40, 124)); }
 				
 				
 				else if (word.equals("f")) { collisionVals.get(row).add(0); tilePieces.get(row).add(new Tile (40,40, 301)); }
@@ -145,13 +163,35 @@ public class Room {
 		componentList.add(listR1);
 		
 		ArrayList<Component> listR2 = new ArrayList<Component>();
-		Component cRug2_1 = new Component(253, false, false, 160, 250); listR2.add(cRug2_1);
+		Component cRug2_1 = new Component(253, false, false, 165, 250); listR2.add(cRug2_1);
 		Component cFenceV2_1 = new Component(301, false, false, 355, 70); listR2.add(cFenceV2_1);
 		Component cFenceH2_1 = new Component(302, false, false, 355, 189); listR2.add(cFenceH2_1);
 		Component cDoor2_1 = new Component(2, false, true, 200, 270); listR2.add(cDoor2_1);
 		Component cTree2_1 = new Component(401, true, true, 280, 325); listR2.add(cTree2_1);
 		Component cTree2_2 = new Component(402, true, true, 310, 220); listR2.add(cTree2_2);
 		Component cTree2_3 = new Component(403, true, true, 465, 310); listR2.add(cTree2_3);
+		Component mooseH2_1 = new Component(218, true, false, 170, 185); listR2.add(mooseH2_1);
+		Component chairU2_1 = new Component(204, false, false, 50, 230); listR2.add(chairU2_1); //
+		Component chairL2_1 = new Component(207, false, false, 80, 200); listR2.add(chairL2_1); //
+		Component chairD2_1 = new Component(206, false, false, 50, 170); listR2.add(chairD2_1); // 
+		Component chairU2_2 = new Component(204, false, false, 50, 310); listR2.add(chairU2_2);
+		Component chairL2_2 = new Component(207, false, false, 80, 280); listR2.add(chairL2_2);
+		Component chairD2_2 = new Component(206, false, false, 50, 250); listR2.add(chairD2_2);
+		Component chairU2_3 = new Component(204, false, false, 130, 270); listR2.add(chairU2_3);
+		Component chairL2_3 = new Component(207, false, false, 160, 240); listR2.add(chairL2_3);
+		Component chairD2_3 = new Component(206, false, false, 130, 210); listR2.add(chairD2_3);
+		Component chairR2_3 = new Component(205, false, false, 100, 240); listR2.add(chairR2_3);
+		Component stool2_1 = new Component(203, false, false, 55, 70); listR2.add(stool2_1);
+		Component stool2_2 = new Component(203, false, false, 55, 95); listR2.add(stool2_2);
+		Component stool2_3 = new Component(203, false, false, 55, 120); listR2.add(stool2_3);
+		Component stool2_4 = new Component(203, false, false, 90, 155); listR2.add(stool2_4);
+		Component stool2_5 = new Component(203, false, false, 115, 155); listR2.add(stool2_5);
+		Component stool2_6 = new Component(203, false, false, 140, 155); listR2.add(stool2_6);
+		Component stool2_7 = new Component(203, false, false, 165, 155); listR2.add(stool2_7);
+		Component barrack2_1 = new Component(219, false, false, 130, 65); listR2.add(barrack2_1);
+		
+		
+		
 		componentList.add(listR2);
 		ArrayList<Component> listR3 = new ArrayList<Component>();
 		componentList.add(listR3);
