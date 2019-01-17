@@ -1,0 +1,7 @@
+XD  7 1 8 2 9 3 10 8
+Gold 25
+Room 3 88.0 248.0
+2019/01/16 20:01:20
+Potions 1 0 0
+Weapons
+Key_Items

@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +16,11 @@ public class SaveManager extends JPanel implements ActionListener {
 	JLabel lblClass, lblStr, lblPer, lblArmor, lblHeal, lblReact, lblWis;
 	JLabel lblCName, lblStrS, lblPerS, lblArmS, lblHealS, lblReactS, lblWisS, lblTotalS;
 
-	JLabel lblSure;
+	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	LocalDateTime now;
+	String lastSaveDate, lastSaveTime;
+	
+	JLabel lblSure1, lblSure2, lblSaveDate1, lblSaveDate2, lblSaveTime1, lblSaveTime2;
 	JButton btnSave, btnCancelSave;
 	JLabel lblChoose, lblDummy;
 	JComboBox<String> fileBox;
@@ -24,6 +30,7 @@ public class SaveManager extends JPanel implements ActionListener {
 	JTextField tfName;
 	private Color menuColor = new Color(52, 63, 71);
 
+	
 	ArrayList<ImageIcon> charList = new ArrayList<ImageIcon>();
 	ArrayList<ArrayList<Integer>> statsList = new ArrayList<ArrayList<Integer>>();
 	ArrayList<Integer> spearmanList = new ArrayList<Integer>();
@@ -317,6 +324,10 @@ public class SaveManager extends JPanel implements ActionListener {
 					plr.goldAmount = scanner.nextInt();
 					scanner.next();
 					int roomNo = scanner.nextInt();
+					double xPos = scanner.nextDouble();
+					double yPos = scanner.nextDouble();
+					lastSaveDate = scanner.next();
+					lastSaveTime = scanner.next();
 					scanner.next();
 					plr.countPS = scanner.nextInt();
 					plr.countPM = scanner.nextInt();
@@ -324,7 +335,7 @@ public class SaveManager extends JPanel implements ActionListener {
 					loadFrame.dispose();
 					mainGame.tfEventArea.setText("Player: " + plr.countPL + " loaded!");
 					mainGame.makeScreen(roomNo);
-					mainGame.setPlayer(plr);
+					mainGame.setPlayer(plr, xPos, yPos);
 					mainGame.room.add_above_components(roomNo);
 					mainGame.enableButtons();
 				} catch (Exception e) { System.out.println("ERROR");}
@@ -335,6 +346,7 @@ public class SaveManager extends JPanel implements ActionListener {
 			loadFrame.dispose();
 			mainGame.enableButtons();
 		}
+		if (evt.getActionCommand().equals("Save")) { saveGame(); }
 	}
 
 	public void changeStats() {
@@ -382,6 +394,7 @@ public class SaveManager extends JPanel implements ActionListener {
 	}
 
 	public void createNewSave() {
+		
 		try {
 			String currentFile = "../Saves/" + tfName.getText() + ".txt";
 			File fold = new File(currentFile);
@@ -402,14 +415,16 @@ public class SaveManager extends JPanel implements ActionListener {
 			if (charNum == 11) { fileWriter.write(" 11 1 10 9 1 6 5 9"); }
 			if (charNum == 12) { fileWriter.write(" 12 1 8 4 8 9 6 5"); }
 			fileWriter.write("\nGold 25\n");
-			fileWriter.write("Room 1\n");
-			fileWriter.write("Potions 1 0 0\n");
+			fileWriter.write("Room 1 90 125\n");
+			fileWriter.write(dtf.format(LocalDateTime.now()));
+			fileWriter.write("\nPotions 1 0 0\n");
 			fileWriter.write("Weapons\n");
 			fileWriter.write("Key_Items\n");
 
 			fileWriter.close();
 		} catch (Exception e) {
 			System.out.println("Exception caught."); // Prints if an error is found
+			System.out.println(e);
 		}
 	} 
 
@@ -424,14 +439,36 @@ public class SaveManager extends JPanel implements ActionListener {
 		saveFrame.setResizable(false);
 		saveFrame.setTitle("Save Game");
 
-		lblSure = new JLabel("Are you sure you wish to Save?\n This will overwrite your current save."); 
-		lblSure.setFont(fLabel); lblSure.setForeground(Color.WHITE); 
-		lblSure.setBounds(width - lblSure.getWidth()/2, 10, lblSure.getWidth(), 60); saveFrame.add(lblSure);
+		lblSure1 = new JLabel("Are you sure you wish to save?");
+		lblSure1.setFont(fLabel); lblSure1.setForeground(Color.WHITE); 
+		lblSure1.setBounds(14, 5, width, 30); saveFrame.add(lblSure1);
 
-
-		btnCancel = new JButton("Cancel"); btnCancel.setBounds(width/2, 28, 80, 30);
+		lblSure2 = new JLabel("Old Save          New Save");
+		lblSure2.setFont(fLabel); lblSure2.setForeground(Color.WHITE); 
+		lblSure2.setBounds(25, 30, width, 30); saveFrame.add(lblSure2);
+		
+		now = LocalDateTime.now();
+	    String dtNow = dtf.format(now).toString();
+        String dateNow = dtNow.substring(0, 10);
+        String timeNow = dtNow.substring(11, dtNow.length());
+        lblSaveDate1 = new JLabel(lastSaveDate);
+        lblSaveDate1.setFont(fLabel); lblSaveDate1.setForeground(Color.WHITE); 
+        lblSaveDate1.setBounds(25, 50, 80, 30); saveFrame.add(lblSaveDate1);
+        lblSaveTime1 = new JLabel(lastSaveTime);
+        lblSaveTime1.setFont(fLabel); lblSaveTime1.setForeground(Color.WHITE); 
+        lblSaveTime1.setBounds(25, 70, 80, 30); saveFrame.add(lblSaveTime1);
+        
+        lblSaveDate2 = new JLabel(dateNow);
+        lblSaveDate2.setFont(fLabel); lblSaveDate2.setForeground(Color.WHITE); 
+        lblSaveDate2.setBounds(120, 50, 80, 30); saveFrame.add(lblSaveDate2);
+        lblSaveTime2 = new JLabel(timeNow);
+        lblSaveTime2.setFont(fLabel); lblSaveTime2.setForeground(Color.WHITE); 
+        lblSaveTime2.setBounds(120, 70, 80, 30); saveFrame.add(lblSaveTime2);
+        
+		btnSave = new JButton("Save"); btnSave.setBounds(25, 160, 80, 30);
+		btnSave.addActionListener(this); saveFrame.add(btnSave);
+		btnCancel = new JButton("Cancel"); btnCancel.setBounds(120, 160, 80, 30);
 		btnCancel.addActionListener(this); saveFrame.add(btnCancel);
-
 
 		dummyLabel = new JLabel("");
 		saveFrame.add(dummyLabel);
@@ -439,6 +476,29 @@ public class SaveManager extends JPanel implements ActionListener {
 		saveFrame.setVisible(true);
 		saveFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		saveFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+	}
+	
+	public void saveGame() {
+		try {
+			String currentFile = "../Saves/" + plr.name + ".txt";
+			File fold = new File(currentFile);
+			fold.delete();
+			fileWriter = new BufferedWriter(new FileWriter(currentFile, false));
+			fileWriter.write(plr.name + " " + " " + plr.classChar + " " + plr.level + " " + plr.strength + " " +
+							 plr.armor + " " + plr.maxHeal + " " + plr.react + " " + plr.wisdom + " " + plr.persuasion);
+			fileWriter.write("\nGold " + plr.goldAmount +"\n");
+			fileWriter.write("Room " + plr.currentRoom + " " + plr.xLoc + " " + plr.yLoc + "\n");
+			fileWriter.write(dtf.format(LocalDateTime.now()));
+			fileWriter.write("\nPotions " + plr.countPS + " " + plr.countPM + " " + plr.countPL + "\n");
+			fileWriter.write("Weapons\n");
+			fileWriter.write("Key_Items\n");
+			fileWriter.close();
+			saveFrame.dispose();
+		}
+		catch (Exception e) {
+			System.out.println("Exception while Saving.");
+			System.out.println(e);// Prints if an error is found
+		} 
 	}
 
 }

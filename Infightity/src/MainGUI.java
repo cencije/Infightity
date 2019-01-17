@@ -200,6 +200,13 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			}
 		}
 	}
+	public void setPlayer(Player plr, double xPos, double yPos) { 
+		System.out.println("PLAYER SET!"); 
+		p = plr; spr = new Sprite(p, this); 
+		add(spr, xPos, yPos);
+		new Thread(spr).start();		
+	}
+	
 	public void run() {
 
 		while (true) {
@@ -317,12 +324,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			}
 		}
 	}
-	public void setPlayer(Player plr) { 
-		System.out.println("PLAYER SET!"); 
-		p = plr; spr = new Sprite(p, this); 
-		add(spr, 50, 80);
-		new Thread(spr).start();		
-	}
+	
 
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getActionCommand().equals("New Game")) {
@@ -340,11 +342,13 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			btnLS.setEnabled(false);
 		}
 		if (evt.getActionCommand().equals("Save File")) {
-			sm.saveFile(200, 200, 220, 220, this);
-			btnINV.setEnabled(false);
-			btnNG.setEnabled(false);
-			btnSG.setEnabled(false);
-			btnLS.setEnabled(false);
+			if (p != null) {
+				sm.saveFile(200, 200, 220, 220, this);
+				btnINV.setEnabled(false);
+				btnNG.setEnabled(false);
+				btnSG.setEnabled(false);
+				btnLS.setEnabled(false);
+			}
 		}
 		if (evt.getActionCommand().equals("Inventory")) {
 			if (p != null) {
@@ -354,6 +358,17 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 				btnSG.setEnabled(false);
 				btnLS.setEnabled(false);
 			}
+		}
+		if (evt.getActionCommand().equals("Quit Game")) {
+			if (p != null) {
+				p = null;
+				spr = null;
+				
+			}
+			else {
+				
+			}
+			System.exit(0);
 		}
 	}
 
@@ -406,12 +421,14 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 				for (int i = 0; i < enemyList.size(); i++) {
 					enemyList.get(i).paused = true;
 				}
+				spr.plr.set_xy(spr.getX(), spr.getY(), roomNumber);
 			}
 			break;
 		}
 		case KeyEvent.VK_SPACE: {
-			if (p != null) {
+			if (p != null && !paused) {
 				if (notHeld) {
+					
 					notHeld = false;
 					spr.attack();
 				}
@@ -474,19 +491,19 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			break;
 		}
 		case KeyEvent.VK_W: {
-			if (p != null) spr.setSprite(1); 
+			if (p != null && !paused) spr.setSprite(1); 
 			break;
 		}
 		case KeyEvent.VK_S: {
-			if (p != null) spr.setSprite(3); 
+			if (p != null && !paused) spr.setSprite(3); 
 			break;
 		}
 		case KeyEvent.VK_D: {
-			if (p != null) spr.setSprite(2);
+			if (p != null && !paused) spr.setSprite(2);
 			break;
 		}
 		case KeyEvent.VK_A: {
-			if (p != null) spr.setSprite(4);	
+			if (p != null && !paused) spr.setSprite(4);	
 			break;
 		}
 		case KeyEvent.VK_SPACE: {
@@ -557,62 +574,46 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 				if (e.dir == 1) {
 					int ty2 = (int) (e.getY() - 2 - 30 - 10) / 40;
 					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 13) / 40)) return false;
-					else {
-						return true;
-					}
+					else return true;
 				}
 				else if (e.dir == 2) {
 					int tx2 = (int) (e.getX() + 15 + 2) / 40;
 					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-					else {
-						return true;
-					}
+					else return true;
 	
 				}
 				else if (e.dir == 3) {
 					int ty2 = (int) (e.getY() + 15 + 2 - 30) / 40;
 					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 13) / 40)) return false;
-					else {
-						return true;
-					}
+					else return true;
 				}
 				else if (e.dir == 4) {
 					int tx2 = (int) (e.getX() - 2) / 40;
 					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-					else {
-						return true;
-					}
+					else return true;
 				}
 			}
 			else if (e.enemyID == 2) {
 				if (e.dir == 1) {
 					int ty2 = (int) (e.getY() - 1 - 30 - 10) / 40;
 					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 24) / 40)) return false;
-					else {
-						return true;
-					}
+					else return true;
 				}
 				else if (e.dir == 2) {
 					int tx2 = (int) (e.getX() + 25 + 1) / 40;
 					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-					else {
-						return true;
-					}
+					else return true;
 	
 				}
 				else if (e.dir == 3) {
 					int ty2 = (int) (e.getY() + 25 + 1 - 30) / 40;
 					if (!collide(false,ty2, (int) (e.getX()) / 40) && !collide(false,ty2, (int) (e.getX() + 24) / 40)) return false;
-					else {
-						return true;
-					}
+					else return true;
 				}
 				else if (e.dir == 4) {
 					int tx2 = (int) (e.getX() - 1) / 40;
 					if (!collide(false,(int) (e.getY() - 30) / 40, tx2) && !collide(false,(int) (e.getY() - 5) / 40, tx2)) return false;
-					else {
-						return true;
-					}
+					else return true;
 				}
 			}
 		}

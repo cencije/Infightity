@@ -17,7 +17,8 @@ public class Player {
     int goldAmount = 25;
     String charClass;
     double pX = 0, pY = 0;
- 
+    double xLoc, yLoc;
+    int currentRoom;
     // Unchangeable
     public void setName(String pName) { this.name = pName; }
     public void setClass(int classNo) {
@@ -30,6 +31,10 @@ public class Player {
     public void increaseKillCount() {this.killTotal = killTotal + 1;}
     public void increaseTotalDamageDealt(int dmg) {this.dmgTotal = dmgTotal + dmg;}
 
+    public void set_xy(double x, double y, int curRoom) {
+    	xLoc = x; yLoc = y;
+    	currentRoom = curRoom;
+    }
     // Affected Attributes
     public void setHealth(int health) {
         this.maxHealth = health; this.currentHealth = maxHealth;
