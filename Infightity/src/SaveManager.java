@@ -11,22 +11,22 @@ public class SaveManager extends JPanel implements ActionListener {
 
 	MainGUI mainGame;
 	Font fLabel = new Font("Serif", Font.BOLD, 14);
-	JFrame mainFrame, noNameFrame, loadFrame, saveFrame;
+	JFrame newgameFrame, noNameFrame, loadFrame, saveFrame;
 	JLabel dummyLabel, lblName, lblNoName;
 	JLabel lblClass, lblStr, lblPer, lblArmor, lblHeal, lblReact, lblWis;
 	JLabel lblCName, lblStrS, lblPerS, lblArmS, lblHealS, lblReactS, lblWisS, lblTotalS;
 
-	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 	LocalDateTime now;
 	String lastSaveDate, lastSaveTime;
 	
 	JLabel lblSure1, lblSure2, lblSaveDate1, lblSaveDate2, lblSaveTime1, lblSaveTime2;
-	JButton btnSave, btnCancelSave;
+	JButton btnSave, btnSaveCancel;
 	JLabel lblChoose, lblDummy;
 	JComboBox<String> fileBox;
 	File[] listOfSaves;
-	JButton btnLoadSelect, btnLoadClose;
-	JButton btnSubmit, btnCancel, btnOkay, btnPrev, btnNext;
+	JButton btnLoadSelect, btnLoadCancel;
+	JButton btnSubmit, btnNewCancel, btnOkay, btnPrev, btnNext;
 	JTextField tfName;
 	private Color menuColor = new Color(52, 63, 71);
 
@@ -48,100 +48,102 @@ public class SaveManager extends JPanel implements ActionListener {
 	int charNum = 0;
 	BufferedReader fileReader = null;
 	FileReader fr = null;
+	
+	boolean newgameFrameUp = false, loadFrameUp = false, saveFrameUp = false;
 
 	public void newFile(int x, int y, int width, int height, MainGUI game) {
 		setLists();
 
 		mainGame = game;
-		mainFrame = new JFrame();
+		newgameFrame = new JFrame();
 
-		mainFrame.getContentPane().setBackground(menuColor);
-		mainFrame.getRootPane().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
-		mainFrame.setBounds(x,y, width,height);
-		mainFrame.getContentPane().setLayout(new BorderLayout());
-		mainFrame.setResizable(false);
-		mainFrame.setTitle("New Game");
+		newgameFrame.getContentPane().setBackground(menuColor);
+		newgameFrame.getRootPane().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
+		newgameFrame.setBounds(x,y, width,height);
+		newgameFrame.getContentPane().setLayout(new BorderLayout());
+		newgameFrame.setResizable(false);
+		newgameFrame.setTitle("New Game");
 
 		lblClass = new JLabel("Class:"); lblClass.setFont(fLabel);  lblClass.setForeground(Color.WHITE);
-		lblClass.setBounds(105, 50, 45, 30); mainFrame.add(lblClass);
+		lblClass.setBounds(105, 50, 45, 30); newgameFrame.add(lblClass);
 
 		lblCName = new JLabel("Archer"); lblCName.setFont(fLabel);  lblCName.setForeground(Color.WHITE);
-		lblCName.setBounds(145, 50, 70, 30); mainFrame.add(lblCName);
+		lblCName.setBounds(145, 50, 70, 30); newgameFrame.add(lblCName);
 
 		lblStr = new JLabel("Strength:"); lblStr.setFont(fLabel); lblStr.setForeground(Color.WHITE);
-		lblStr.setBounds(105, 65, 60, 30);  mainFrame.add(lblStr);
+		lblStr.setBounds(105, 65, 60, 30);  newgameFrame.add(lblStr);
 
 		lblStrS = new JLabel(statsList.get(0).get(0).toString()); lblStrS.setFont(fLabel);
 		lblStrS.setForeground(Color.WHITE); lblStrS.setBounds(185, 65, 20, 30);
-		mainFrame.add(lblStrS);
+		newgameFrame.add(lblStrS);
 
 		lblArmor = new JLabel("Armor:"); lblArmor.setFont(fLabel);  lblArmor.setForeground(Color.WHITE);
-		lblArmor.setBounds(105, 80, 50, 30); mainFrame.add(lblArmor);
+		lblArmor.setBounds(105, 80, 50, 30); newgameFrame.add(lblArmor);
 
 		lblArmS = new JLabel(statsList.get(0).get(1).toString());  lblArmS.setFont(fLabel);
 		lblArmS.setForeground(Color.WHITE);  lblArmS.setBounds(185, 80, 50, 30);
-		mainFrame.add(lblArmS);
+		newgameFrame.add(lblArmS);
 
 		lblHeal = new JLabel("Heal:"); lblHeal.setFont(fLabel); lblHeal.setForeground(Color.WHITE);
-		lblHeal.setBounds(105, 95, 45, 30); mainFrame.add(lblHeal);
+		lblHeal.setBounds(105, 95, 45, 30); newgameFrame.add(lblHeal);
 
 		lblHealS = new JLabel(statsList.get(0).get(2).toString());  lblHealS.setFont(fLabel);
 		lblHealS.setForeground(Color.WHITE); lblHealS.setBounds(185, 95, 45, 30);
-		mainFrame.add(lblHealS);
+		newgameFrame.add(lblHealS);
 
 		lblReact = new JLabel("React:"); lblReact.setFont(fLabel); lblReact.setForeground(Color.WHITE);
-		lblReact.setBounds(105, 110, 50, 30); mainFrame.add(lblReact);
+		lblReact.setBounds(105, 110, 50, 30); newgameFrame.add(lblReact);
 
 		lblReactS = new JLabel(statsList.get(0).get(3).toString()); lblReactS.setFont(fLabel);
 		lblReactS.setForeground(Color.WHITE);  lblReactS.setBounds(185, 110, 50, 30);
-		mainFrame.add(lblReactS);
+		newgameFrame.add(lblReactS);
 
 		lblWis = new JLabel("Wisdom:");  lblWis.setFont(fLabel); lblWis.setForeground(Color.WHITE);
-		lblWis.setBounds(105, 125, 55, 30);  mainFrame.add(lblWis);
+		lblWis.setBounds(105, 125, 55, 30);  newgameFrame.add(lblWis);
 
 		lblWisS = new JLabel(statsList.get(0).get(4).toString()); lblWisS.setFont(fLabel);
 		lblWisS.setForeground(Color.WHITE); lblWisS.setBounds(185, 125, 55, 30);
-		mainFrame.add(lblWisS);
+		newgameFrame.add(lblWisS);
 
 		lblPer = new JLabel("Persuasion:"); lblPer.setFont(fLabel); lblPer.setForeground(Color.WHITE); 
-		lblPer.setBounds(105, 140, 70, 30); mainFrame.add(lblPer);
+		lblPer.setBounds(105, 140, 70, 30); newgameFrame.add(lblPer);
 
 		lblPerS = new JLabel(statsList.get(0).get(5).toString()); lblPerS.setFont(fLabel);
 		lblPerS.setForeground(Color.WHITE); lblPerS.setBounds(185, 140, 55, 30);
-		mainFrame.add(lblPerS);
+		newgameFrame.add(lblPerS);
 
 		lblTotalS = new JLabel("Total =       40"); lblTotalS.setFont(fLabel);
 		lblTotalS.setForeground(Color.WHITE); lblTotalS.setBounds(105, 155, 90, 30);
-		mainFrame.add(lblTotalS);
+		newgameFrame.add(lblTotalS);
 
 		lblName = new JLabel("Name:"); lblName.setFont(new Font("Serif", Font.BOLD, 16));
 		lblName.setForeground(Color.WHITE);  lblName.setBounds(5, 1, 45, 30);
-		mainFrame.add(lblName);
+		newgameFrame.add(lblName);
 
 		tfName = new JTextField("", 30); tfName.setBounds(55, 1, 140, 30);
-		tfName.setEditable(true); mainFrame.add(tfName);
+		tfName.setEditable(true); newgameFrame.add(tfName);
 
 		btnSubmit = new JButton("Create"); btnSubmit.setBounds(width/10, 28, 80, 30);
-		btnSubmit.addActionListener(this); mainFrame.add(btnSubmit);
+		btnSubmit.addActionListener(this); newgameFrame.add(btnSubmit);
 
-		btnCancel = new JButton("Cancel"); btnCancel.setBounds(width/2, 28, 80, 30);
-		btnCancel.addActionListener(this); mainFrame.add(btnCancel);
+		btnNewCancel = new JButton("Cancel"); btnNewCancel.setBounds(width/2, 28, 80, 30);
+		btnNewCancel.addActionListener(this); newgameFrame.add(btnNewCancel);
 
 		charNum = 0;
 		currentChar = new JLabel(charList.get(0)); currentChar.setBounds(10, 60, 80, 80);
-		mainFrame.add(currentChar);
+		newgameFrame.add(currentChar);
 
 		btnPrev = new JButton("Prev"); btnPrev.setBounds(1, 150, 55, 30);
-		btnPrev.addActionListener(this); mainFrame.add(btnPrev);
+		btnPrev.addActionListener(this); newgameFrame.add(btnPrev);
 
 		btnNext = new JButton("Next"); btnNext.setBounds(51,150, 55, 30);
-		btnNext.addActionListener(this);  mainFrame.add(btnNext);
-		dummyLabel = new JLabel(""); mainFrame.add(dummyLabel);
+		btnNext.addActionListener(this);  newgameFrame.add(btnNext);
+		dummyLabel = new JLabel(""); newgameFrame.add(dummyLabel);
 
-		mainFrame.setVisible(true);
-		mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		//mainFrame.setUndecorated(true);
-		mainFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+		newgameFrame.setVisible(true);
+		newgameFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		//newgameFrame.setUndecorated(true);
+		newgameFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
 	}
 
@@ -183,6 +185,7 @@ public class SaveManager extends JPanel implements ActionListener {
 
 	}
 	public void loadFile(int x, int y, int width, int height, MainGUI game) {
+		loadFrameUp = true;
 		mainGame = game;
 		loadFrame = new JFrame();
 
@@ -201,8 +204,8 @@ public class SaveManager extends JPanel implements ActionListener {
 		btnLoadSelect = new JButton("Load Game");  btnLoadSelect.setBounds(60, 60, 100, 30);
 		btnLoadSelect.addActionListener(this); loadFrame.add(btnLoadSelect);
 
-		btnLoadClose = new JButton("Close"); btnLoadClose.setBounds(60, 100, 100, 30);
-		btnLoadClose.addActionListener(this); loadFrame.add(btnLoadClose);
+		btnLoadCancel = new JButton("Cancel"); btnLoadCancel.setBounds(60, 100, 100, 30);
+		btnLoadCancel.addActionListener(this); loadFrame.add(btnLoadCancel);
 
 		lblChoose = new JLabel("Choose a save file to load");
 		lblChoose.setFont(fLabel);
@@ -256,12 +259,11 @@ public class SaveManager extends JPanel implements ActionListener {
 
 		noNameFrame.setVisible(true);
 		noNameFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		//oNameFrame.setUndecorated(true);
 		noNameFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
 	}
 
-	public void makeVisibleLogin() { mainFrame.setVisible(true);}
+	public void makeVisibleLogin() { newgameFrame.setVisible(true);}
 	public void makeVisibleNoName() { noNameFrame.setVisible(true);}
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getActionCommand().equals("My B")) {
@@ -270,24 +272,28 @@ public class SaveManager extends JPanel implements ActionListener {
 		}
 		if (evt.getActionCommand().equals("Cancel")) {
 			//main.showScreen(0);
-			mainFrame.dispose();
-			mainGame.enableButtons();
-		}
-		if (evt.getActionCommand().equals("Cancel")) {
-			//if (loadFrame.isVisible()) loadFrame.dispose();
-			//if (saveFrame.isVisible()) saveFrame.dispose();
+			if (newgameFrameUp) {
+				newgameFrameUp = false;
+				newgameFrame.dispose();
+			}
+			if (loadFrameUp) {
+				loadFrameUp = false;
+				loadFrame.dispose();
+			}
+			if (saveFrameUp) {
+				saveFrameUp = false;
+				saveFrame.dispose();
+				
+			}
+			//mainGame.enableButtons();
 		}
 		if (evt.getActionCommand().equals("Create")) {
 			String typedName = tfName.getText();
 			if (typedName.trim().length() > 0 && typedName.length() <= 8) {
-				if (!checkExists()) { createNewSave(); mainFrame.dispose(); mainGame.enableButtons();}
-				else {
-					createWarningBox(200,200,220,80, "File Already Exists");
-				}
+				if (!checkExists()) { createNewSave(); newgameFrame.dispose(); mainGame.enableButtons();}
+				else { createWarningBox(200,200,220,80, "File Already Exists"); }
 			}
-			else {
-				createWarningBox(200,200,220,80, "Please write your name (Max 8 Letters)");
-			}
+			else { createWarningBox(200,200,220,80, "Please write your name (Max 8 Letters)"); }
 
 		}
 		if (evt.getActionCommand().equals("Prev")) {
@@ -324,8 +330,10 @@ public class SaveManager extends JPanel implements ActionListener {
 					plr.goldAmount = scanner.nextInt();
 					scanner.next();
 					int roomNo = scanner.nextInt();
+					plr.currentRoom = roomNo;
 					double xPos = scanner.nextDouble();
 					double yPos = scanner.nextDouble();
+					plr.xLoc = xPos; plr.yLoc = yPos;
 					lastSaveDate = scanner.next();
 					lastSaveTime = scanner.next();
 					scanner.next();
@@ -338,13 +346,9 @@ public class SaveManager extends JPanel implements ActionListener {
 					mainGame.setPlayer(plr, xPos, yPos);
 					mainGame.room.add_above_components(roomNo);
 					mainGame.enableButtons();
+					loadFrameUp = false;
 				} catch (Exception e) { System.out.println("ERROR");}
 			}
-		}
-		if (evt.getActionCommand().equals("Close")) {
-			//main.showScreen(0);
-			loadFrame.dispose();
-			mainGame.enableButtons();
 		}
 		if (evt.getActionCommand().equals("Save")) { saveGame(); }
 	}
@@ -429,6 +433,7 @@ public class SaveManager extends JPanel implements ActionListener {
 	} 
 
 	public void saveFile(int x, int y, int width, int height, MainGUI game) {
+		saveFrameUp = true;
 		mainGame = game;
 		saveFrame = new JFrame();
 
@@ -467,8 +472,8 @@ public class SaveManager extends JPanel implements ActionListener {
         
 		btnSave = new JButton("Save"); btnSave.setBounds(25, 160, 80, 30);
 		btnSave.addActionListener(this); saveFrame.add(btnSave);
-		btnCancel = new JButton("Cancel"); btnCancel.setBounds(120, 160, 80, 30);
-		btnCancel.addActionListener(this); saveFrame.add(btnCancel);
+		btnSaveCancel = new JButton("Cancel"); btnSaveCancel.setBounds(120, 160, 80, 30);
+		btnSaveCancel.addActionListener(this); saveFrame.add(btnSaveCancel);
 
 		dummyLabel = new JLabel("");
 		saveFrame.add(dummyLabel);
@@ -494,11 +499,13 @@ public class SaveManager extends JPanel implements ActionListener {
 			fileWriter.write("Key_Items\n");
 			fileWriter.close();
 			saveFrame.dispose();
+			saveFrameUp = false;
 		}
 		catch (Exception e) {
 			System.out.println("Exception while Saving.");
 			System.out.println(e);// Prints if an error is found
 		} 
+		
 	}
 
 }

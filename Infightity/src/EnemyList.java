@@ -20,7 +20,7 @@ public class EnemyList {
     
     ArrayList<Enemy> enemyListCurrent = new ArrayList<Enemy>();
     
-    public void set_main(MainGUI mainGUI) { this.mainGUI = mainGUI; }
+    public void setMain(MainGUI mainGUI) { this.mainGUI = mainGUI; }
     public void setEnemyList(MainGUI mainGUI)
     {
     	

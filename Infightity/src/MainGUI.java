@@ -123,13 +123,12 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 
 		rectProfile = new GRect(510,441,85,85); rectProfile.setFilled(true); rectProfile.setFillColor(menuColor); 
 		rectProfile.setColor(Color.WHITE); add(rectProfile);
+		
 		imgEnemy = new GImage(""); imgEnemy.setVisible(false);
 		add(imgEnemy, 512, 445);
-		glblEnemy = new GLabel("Morp", 552, 541);
-		glblEnemy.setFont(new Font("Verdana", Font.PLAIN, 13));
-		glblEnemy.move(-glblEnemy.getWidth()/2, 0);
-		glblEnemy.setVisible(false);
-		add(glblEnemy);
+		glblEnemy = new GLabel("Morp", 552, 541); glblEnemy.setFont(new Font("Verdana", Font.PLAIN, 13));
+		glblEnemy.move(-glblEnemy.getWidth()/2, 0); glblEnemy.setVisible(false); add(glblEnemy);
+		
 		rectHRem = new GRect(510,550,85,15); rectHRem.setFilled(true); rectHRem.setFillColor(Color.RED); 
 		rectHRem.setColor(Color.BLACK); add(rectHRem); rectHRem.setVisible(false);
 		rectHBar = new GRect(510,550,85,15); rectHBar.setFilled(true); rectHBar.setFillColor(Color.GREEN); 
@@ -140,7 +139,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		addKeyListeners();
 
 		eL = new EnemyList();
-		eL.set_main(this);
+		eL.setMain(this);
 		musicMenu.loop();
 	}
 	public void enableButtons() {
@@ -628,12 +627,19 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	}
 	
 	public void returnToMenu() {
+		remove(spr);
 		p = null; spr = null;
 		imgEnemy.setImage("");
-		add(imgBG, 0, 30);
-		eL = new EnemyList();
+		//add(imgBG, 0, 30);
+		while(enemyList.size() > 0) { remove(enemyList.get(0)); enemyList.remove(0); }
+		eL = new EnemyList(); eL.setMain(this);
 		btnNG.setEnabled(true); btnSG.setEnabled(false); btnLS.setEnabled(true);
 		mapLayout.stopMusic();
+		for (int row = 0; row < 10; row++) {
+			for (int col = 0; col < 15; col++) {
+				remove(tiles[row][col]);
+			}
+		}
 		musicMenu.loop();
 	}
 }
