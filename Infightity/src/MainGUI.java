@@ -138,15 +138,10 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		addMouseListeners();
 		addKeyListeners();
 
+		sm.setLists();
 		eL = new EnemyList();
 		eL.setMain(this);
 		musicMenu.loop();
-	}
-	public void enableButtons() {
-		btnINV.setEnabled(true);
-		btnNG.setEnabled(true);
-		btnSG.setEnabled(true);
-		btnLS.setEnabled(true);
 	}
 	public void makeScreen(int roomNo) {
 		musicMenu.stop();
@@ -219,7 +214,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 						remove(attackList.get(attacks));
 						attackList.remove((attacks));
 						attacks--;
-						System.out.println(attackList.size());
+						//System.out.println(attackList.size());
 					}
 				}
 				if (spr != null) {
@@ -343,10 +338,8 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		if (evt.getActionCommand().equals("Save File")) {
 			if (p != null) {
 				sm.saveFile(200, 200, 220, 220, this);
-				btnINV.setEnabled(false);
-				btnNG.setEnabled(false);
-				btnSG.setEnabled(false);
-				btnLS.setEnabled(false);
+				btnINV.setEnabled(false); btnNG.setEnabled(false); btnSG.setEnabled(false);
+				btnLS.setEnabled(false); btnQuit.setEnabled(false);
 			}
 		}
 		if (evt.getActionCommand().equals("Inventory")) {
@@ -361,7 +354,6 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		if (evt.getActionCommand().equals("Quit Game")) {
 			if (p != null) { returnToMenu(); }
 			else { System.exit(0); }
-			
 		}
 	}
 
@@ -405,16 +397,24 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			break;
 		}
 		case KeyEvent.VK_P: {
-			if (paused) { remove(imgPause); paused = false;  btnSG.setEnabled(false); 
-			for (int i = 0; i < enemyList.size(); i++) {
-				enemyList.get(i).paused = false;
-			}}
-			else { 
-				add(imgPause, 40, 200); paused = true; btnSG.setEnabled(true); 
-				for (int i = 0; i < enemyList.size(); i++) {
-					enemyList.get(i).paused = true;
+			if (p != null) {
+				if (paused) { 
+					if (!sm.loadFrameUp && !sm.saveFrameUp && !inv.invFrameUp) {
+						System.out.println("UNPAUSED");
+						remove(imgPause); paused = false;
+						btnSG.setEnabled(false); btnLS.setEnabled(false); btnQuit.setEnabled(false);
+						btnINV.setEnabled(false);
+						for (int i = 0; i < enemyList.size(); i++) enemyList.get(i).paused = false; 
+					}
 				}
-				spr.plr.set_xy(spr.getX(), spr.getY(), roomNumber);
+				else { 
+					add(imgPause, 40, 200); paused = true; 
+					System.out.println("PAUSED");
+					btnSG.setEnabled(true); btnLS.setEnabled(false); btnQuit.setEnabled(true);
+					btnINV.setEnabled(true);
+					for (int i = 0; i < enemyList.size(); i++)  enemyList.get(i).paused = true;
+					spr.plr.set_xy(spr.getX(), spr.getY(), roomNumber);
+				}
 			}
 			break;
 		}
@@ -631,15 +631,23 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		p = null; spr = null;
 		imgEnemy.setImage("");
 		//add(imgBG, 0, 30);
+		
 		while(enemyList.size() > 0) { remove(enemyList.get(0)); enemyList.remove(0); }
+		room.remove_components(roomNumber);
 		eL = new EnemyList(); eL.setMain(this);
-		btnNG.setEnabled(true); btnSG.setEnabled(false); btnLS.setEnabled(true);
+		
+		btnNG.setEnabled(true); btnSG.setEnabled(false); btnLS.setEnabled(true); btnINV.setEnabled(false);
+		
+		if (paused) { remove(imgPause); paused = false; }
+		
 		mapLayout.stopMusic();
+		
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 15; col++) {
 				remove(tiles[row][col]);
 			}
 		}
+		
 		musicMenu.loop();
 	}
 }

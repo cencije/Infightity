@@ -35,10 +35,14 @@ public class Inventory extends JPanel implements ActionListener {
 	JLabel lblHealth, lblStr, lblArm, lblReact, lblWis, lblPer;
 	JButton btnExit;
 	ImageIcon imgPlayer;
+	boolean invFrameUp = false;
 	
 	public void openInventory(int x, int y, int width, int height, int charClass, Player p, MainGUI game) {
 		plr = p;
 		mainGame = game;
+		mainGame.btnNG.setEnabled(false); mainGame.btnSG.setEnabled(false); mainGame.btnLS.setEnabled(false);
+		mainGame.btnINV.setEnabled(false); mainGame.btnQuit.setEnabled(false);
+		invFrameUp = true;
 		mainFrame = new JFrame();
 		
 		mainFrame.getContentPane().setBackground(menuColor);
@@ -47,6 +51,7 @@ public class Inventory extends JPanel implements ActionListener {
 		mainFrame.getContentPane().setLayout(new BorderLayout());
 		mainFrame.setResizable(false);
 		mainFrame.setTitle("Inventory");
+		
  	    
  	    
 		if (charClass == 0) imgPlayer = new ImageIcon("../Images/Profiles/Player/Archer1.png");
@@ -201,7 +206,9 @@ public class Inventory extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent evt) {
 		 if (evt.getActionCommand().equals("Exit")) {
 			 mainFrame.dispose();
-			 mainGame.enableButtons();
+			 mainGame.btnNG.setEnabled(false); mainGame.btnSG.setEnabled(true); mainGame.btnLS.setEnabled(false);
+			 mainGame.btnINV.setEnabled(true); mainGame.btnQuit.setEnabled(true);
+			 invFrameUp = false;
 		 }
 	}
 	

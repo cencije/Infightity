@@ -52,8 +52,7 @@ public class SaveManager extends JPanel implements ActionListener {
 	boolean newgameFrameUp = false, loadFrameUp = false, saveFrameUp = false;
 
 	public void newFile(int x, int y, int width, int height, MainGUI game) {
-		setLists();
-
+		newgameFrameUp = true;
 		mainGame = game;
 		newgameFrame = new JFrame();
 
@@ -142,7 +141,6 @@ public class SaveManager extends JPanel implements ActionListener {
 
 		newgameFrame.setVisible(true);
 		newgameFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		//newgameFrame.setUndecorated(true);
 		newgameFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
 	}
@@ -188,7 +186,8 @@ public class SaveManager extends JPanel implements ActionListener {
 		loadFrameUp = true;
 		mainGame = game;
 		loadFrame = new JFrame();
-
+		mainGame.btnNG.setEnabled(false); mainGame.btnSG.setEnabled(false); mainGame.btnLS.setEnabled(false);
+		mainGame.btnINV.setEnabled(false); mainGame.btnQuit.setEnabled(false);
 		loadFrame.getContentPane().setBackground(menuColor);
 		loadFrame.getRootPane().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
 		loadFrame.setBounds(x,y, width,height);
@@ -216,7 +215,6 @@ public class SaveManager extends JPanel implements ActionListener {
 		loadFrame.add(lblDummy);
 
 		loadFrame.setVisible(true);
-		//loadFrame.setUndecorated(true);
 		loadFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		loadFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
@@ -232,7 +230,6 @@ public class SaveManager extends JPanel implements ActionListener {
 				fileBox.addItem(charName);
 			}
 		}
-
 	}
 
 	public void createWarningBox(int x, int y, int width, int height, String issue) {
@@ -249,7 +246,7 @@ public class SaveManager extends JPanel implements ActionListener {
 		lblNoName.setForeground(Color.WHITE);
 		lblNoName.setBounds(5, 1, 250, 30);
 		noNameFrame.add(lblNoName);
-		btnOkay = new JButton("My B");
+		btnOkay = new JButton("Okay");
 		btnOkay.setBounds(60, 25, 80, 30);
 		btnOkay.addActionListener(this);
 		noNameFrame.add(btnOkay);
@@ -266,49 +263,47 @@ public class SaveManager extends JPanel implements ActionListener {
 	public void makeVisibleLogin() { newgameFrame.setVisible(true);}
 	public void makeVisibleNoName() { noNameFrame.setVisible(true);}
 	public void actionPerformed(ActionEvent evt) {
-		if (evt.getActionCommand().equals("My B")) {
-			//main.showScreen(0);
+		if (evt.getActionCommand().equals("Okay")) {
 			noNameFrame.dispose();
 		}
 		if (evt.getActionCommand().equals("Cancel")) {
-			//main.showScreen(0);
 			if (newgameFrameUp) {
 				newgameFrameUp = false;
 				newgameFrame.dispose();
+				mainGame.btnNG.setEnabled(true);
+				mainGame.btnLS.setEnabled(true);
+				mainGame.btnQuit.setEnabled(true);
 			}
 			if (loadFrameUp) {
 				loadFrameUp = false;
 				loadFrame.dispose();
+				mainGame.btnNG.setEnabled(true);
+				mainGame.btnLS.setEnabled(true);
+				mainGame.btnQuit.setEnabled(true);
 			}
 			if (saveFrameUp) {
 				saveFrameUp = false;
 				saveFrame.dispose();
+				mainGame.btnNG.setEnabled(false); mainGame.btnSG.setEnabled(true); 
+				mainGame.btnLS.setEnabled(false); mainGame.btnINV.setEnabled(true); 
+				mainGame.btnQuit.setEnabled(true);
 				
 			}
-			//mainGame.enableButtons();
 		}
 		if (evt.getActionCommand().equals("Create")) {
 			String typedName = tfName.getText();
 			if (typedName.trim().length() > 0 && typedName.length() <= 8) {
-				if (!checkExists()) { createNewSave(); newgameFrame.dispose(); mainGame.enableButtons();}
+				if (!checkExists()) { createNewSave(); newgameFrame.dispose(); }
 				else { createWarningBox(200,200,220,80, "File Already Exists"); }
 			}
 			else { createWarningBox(200,200,220,80, "Please write your name (Max 8 Letters)"); }
 
 		}
 		if (evt.getActionCommand().equals("Prev")) {
-			charNum--;
-			if (charNum < 0) charNum = charList.size() - 1;
-			System.out.println(charNum);
-			currentChar.setIcon(charList.get(charNum));
-			changeStats();
+			charNum--; changeStats();
 		}
 		if (evt.getActionCommand().equals("Next")) {
-			charNum++;
-			if (charNum >= charList.size()) charNum = 0;
-			System.out.println(charNum);
-			currentChar.setIcon(charList.get(charNum));
-			changeStats();
+			charNum++; changeStats();
 		}
 		if (evt.getActionCommand().equals("Load Game")) {
 			if (fileBox.getSelectedItem() != null) {
@@ -345,15 +340,20 @@ public class SaveManager extends JPanel implements ActionListener {
 					mainGame.makeScreen(roomNo);
 					mainGame.setPlayer(plr, xPos, yPos);
 					mainGame.room.add_above_components(roomNo);
-					mainGame.enableButtons();
 					loadFrameUp = false;
-				} catch (Exception e) { System.out.println("ERROR");}
+					mainGame.btnNG.setEnabled(false); mainGame.btnSG.setEnabled(false); mainGame.btnLS.setEnabled(false);
+					mainGame.btnINV.setEnabled(false); mainGame.btnQuit.setEnabled(false);
+				} catch (Exception e) {  System.out.println("Error Loading"); System.out.println(e); }
 			}
 		}
 		if (evt.getActionCommand().equals("Save")) { saveGame(); }
 	}
 
 	public void changeStats() {
+		if (charNum < 0) charNum = charList.size() - 1;
+		if (charNum >= charList.size()) charNum = 0;
+		currentChar.setIcon(charList.get(charNum));
+		
 		if (charNum >= 0 && charNum <= 2) {
 			lblCName.setText("Archer");
 			lblStrS.setText(statsList.get(0).get(0).toString()); lblArmS.setText(statsList.get(0).get(1).toString());
@@ -426,6 +426,8 @@ public class SaveManager extends JPanel implements ActionListener {
 			fileWriter.write("Key_Items\n");
 
 			fileWriter.close();
+			mainGame.btnNG.setEnabled(true); mainGame.btnSG.setEnabled(false); mainGame.btnLS.setEnabled(true);
+			mainGame.btnINV.setEnabled(false); mainGame.btnQuit.setEnabled(true);
 		} catch (Exception e) {
 			System.out.println("Exception caught."); // Prints if an error is found
 			System.out.println(e);
@@ -493,13 +495,17 @@ public class SaveManager extends JPanel implements ActionListener {
 							 plr.armor + " " + plr.maxHeal + " " + plr.react + " " + plr.wisdom + " " + plr.persuasion);
 			fileWriter.write("\nGold " + plr.goldAmount +"\n");
 			fileWriter.write("Room " + plr.currentRoom + " " + plr.xLoc + " " + plr.yLoc + "\n");
-			fileWriter.write(dtf.format(LocalDateTime.now()));
+			String dtNow = dtf.format(now).toString();
+			lastSaveDate = dtNow.substring(0, 10);
+			lastSaveTime= dtNow.substring(11, dtNow.length());
+			fileWriter.write(lastSaveDate + " " + lastSaveTime);
 			fileWriter.write("\nPotions " + plr.countPS + " " + plr.countPM + " " + plr.countPL + "\n");
 			fileWriter.write("Weapons\n");
 			fileWriter.write("Key_Items\n");
 			fileWriter.close();
 			saveFrame.dispose();
 			saveFrameUp = false;
+			
 		}
 		catch (Exception e) {
 			System.out.println("Exception while Saving.");
