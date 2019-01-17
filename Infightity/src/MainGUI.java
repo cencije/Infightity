@@ -360,15 +360,9 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			}
 		}
 		if (evt.getActionCommand().equals("Quit Game")) {
-			if (p != null) {
-				p = null;
-				spr = null;
-				
-			}
-			else {
-				
-			}
-			System.exit(0);
+			if (p != null) { returnToMenu(); }
+			else { System.exit(0); }
+			
 		}
 	}
 
@@ -631,5 +625,15 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 				c.interact_with();
 			}
 		}
+	}
+	
+	public void returnToMenu() {
+		p = null; spr = null;
+		imgEnemy.setImage("");
+		add(imgBG, 0, 30);
+		eL = new EnemyList();
+		btnNG.setEnabled(true); btnSG.setEnabled(false); btnLS.setEnabled(true);
+		mapLayout.stopMusic();
+		musicMenu.loop();
 	}
 }

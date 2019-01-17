@@ -68,4 +68,6 @@ public class MapLayout {
 	
 		return newRoom;
 	}
+	public void stopMusic() {
+	}
 }
