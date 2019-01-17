@@ -402,19 +402,19 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			if (p != null) {
 				if (paused) { 
 					if (!sm.loadFrameUp && !sm.saveFrameUp && !inv.invFrameUp) {
-						System.out.println("UNPAUSED");
 						remove(imgPause); paused = false;
-						btnSG.setEnabled(false); btnLS.setEnabled(false); btnQuit.setEnabled(false);
-						btnINV.setEnabled(false);
+						btnSG.setEnabled(false); btnLS.setEnabled(false);
+						btnQuit.setEnabled(false); btnINV.setEnabled(false);
 						for (int i = 0; i < enemyList.size(); i++) enemyList.get(i).paused = false; 
+						for (int i = 0; i < attackList.size(); i++) attackList.get(i).paused = false; 
 					}
 				}
 				else { 
 					add(imgPause, 40, 200); paused = true; 
-					System.out.println("PAUSED");
-					btnSG.setEnabled(true); btnLS.setEnabled(false); btnQuit.setEnabled(true);
-					btnINV.setEnabled(true);
+					btnSG.setEnabled(true); btnLS.setEnabled(false); 
+					btnQuit.setEnabled(true); btnINV.setEnabled(true);
 					for (int i = 0; i < enemyList.size(); i++)  enemyList.get(i).paused = true;
+					for (int i = 0; i < attackList.size(); i++) attackList.get(i).paused = true; 
 					spr.plr.set_xy(spr.getX(), spr.getY(), roomNumber);
 				}
 			}
@@ -423,7 +423,6 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		case KeyEvent.VK_SPACE: {
 			if (p != null && !paused) {
 				if (notHeld) {
-					
 					notHeld = false;
 					spr.attack();
 				}

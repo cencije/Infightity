@@ -15,6 +15,8 @@ public class Attack extends GCompound implements Runnable {
 	int x, y;
 	int dir = 1;
 	int cc;
+	boolean paused = false;
+	Timer t;
 	public Attack(MainGUI mg, int cc, int dir, GImage imgAtk) {
 		
 		main = mg;
@@ -32,8 +34,7 @@ public class Attack extends GCompound implements Runnable {
     	blk.setFillColor(Color.BLACK);
     	add(blk);*/
     	
-		
-		Timer t = new Timer();
+		t = new Timer();
 		t.scheduleAtFixedRate(new TimerTask() {
 	        public void run() {
 	            t.cancel();
@@ -43,8 +44,11 @@ public class Attack extends GCompound implements Runnable {
 	}
 	public void run() {
 		while(running) {
-			move(xMove, yMove);
-			pause(DELAY);
+			if (!paused) {
+				move(xMove, yMove);
+				pause(DELAY);
+			}
+			else pause(DELAY);
 		}
 		System.out.println("Shot done!");
 		removeAll();

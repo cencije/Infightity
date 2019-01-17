@@ -110,9 +110,7 @@ public class Enemy extends GCompound implements Runnable {
 	    			}
 	    		}
     		}
-    		else {
-    			pause(DELAY);
-    		}
+    		else pause(DELAY);
     	}
     	if (isDead) showDead();
     	if (deleted) System.out.println("Enemy " + id + " Deleted");
