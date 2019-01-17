@@ -21,6 +21,7 @@ public class Enemy extends GCompound implements Runnable {
     int attackMin, attackMax;
     int level = 1;
     boolean critPoint = false, isDead = false, paused = false;
+    boolean deleted = false;
 
     int x, y;
     int xMove, yMove;
@@ -94,7 +95,7 @@ public class Enemy extends GCompound implements Runnable {
     }
 
     public void run() {
-    	while (!isDead) {
+    	while (!isDead && !deleted) {
     		if (!paused) {
 	    		pause(DELAY);
 	    		move(xMove,yMove);
@@ -113,7 +114,8 @@ public class Enemy extends GCompound implements Runnable {
     			pause(DELAY);
     		}
     	}
-    	showDead();
+    	if (isDead) showDead();
+    	if (deleted) System.out.println("Enemy " + id + " Deleted");
     }
     public int attack()
     {

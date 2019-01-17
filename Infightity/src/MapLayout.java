@@ -4,7 +4,7 @@ public class MapLayout {
 
 	ArrayList<ArrayList<Integer>> mapRooms = new ArrayList<ArrayList<Integer>>();
 	MainGUI mainGUI;
-
+	
 	public MapLayout(MainGUI maingui) {
 		mainGUI = maingui;
 		makeMapRooms();
@@ -47,27 +47,25 @@ public class MapLayout {
 		mapRooms.add(room10);
 	}
 	public int getRoom(int curRoom, int dir) {
+		boolean newSong = false;
 		int newRoom = mapRooms.get(curRoom).get(dir);
 		
 		System.out.println("Room In: " + curRoom + " Going to Room: " + newRoom);
 		
-		if (curRoom == 9 && newRoom == 8) {
-			mainGUI.musicCave.stop();
-			//mainGUI.music
-		}
-		else if (curRoom == 8 && newRoom == 9) {
-			mainGUI.musicSnowTravel.stop();
-			mainGUI.musicCave.loop();
-		}
-		else if (curRoom == 2 && newRoom == 3) {
-			mainGUI.musicSnowTravel.loop();
-		}
-		else if (curRoom == 3 && newRoom == 2) {
-			mainGUI.musicSnowTravel.stop();
-		}
+		if (curRoom == 9 && newRoom == 8) { mainGUI.musicCurrent.stop(); newSong = true; mainGUI.musicCurrent = mainGUI.musicSnowTravel; }
+		else if (curRoom == 8 && newRoom == 9) { mainGUI.musicCurrent.stop(); newSong = true; mainGUI.musicCurrent = mainGUI.musicCave; }
+		else if (curRoom == 2 && newRoom == 3) { mainGUI.musicCurrent.stop(); newSong = true; mainGUI.musicCurrent = mainGUI.musicSnowTravel; }
+		else if (curRoom == 3 && newRoom == 2) { mainGUI.musicCurrent.stop(); newSong = true; mainGUI.musicCurrent = mainGUI.musicMonastery; }
 	
+		if (newSong) {
+			mainGUI.musicCurrent.loop();
+		}
 		return newRoom;
 	}
-	public void stopMusic() {
+	public void startMusic(int roomNumber) {
+		if (roomNumber == 1 || roomNumber == 2) mainGUI.musicCurrent = mainGUI.musicMonastery;
+		if (roomNumber > 2 && roomNumber <= 8) mainGUI.musicCurrent = mainGUI.musicSnowTravel;
+		if (roomNumber > 8 && roomNumber <= 12) mainGUI.musicCurrent = mainGUI.musicCave;
+		mainGUI.musicCurrent.loop();
 	}
 }

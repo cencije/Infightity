@@ -159,6 +159,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			}
 		}
 		room.makeRoom("Room"+roomNumber, roomNumber, 2);
+		mapLayout.startMusic(roomNumber);
 		roomLoaded = true;
 		insert_enemies();
 		drawWeather(condition);
@@ -166,6 +167,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	public void changeScreen(int roomNo) {
 		roomLoaded = false;
 		while(enemyList.size() > 0) {
+			enemyList.get(0).deleted = true;
 			remove(enemyList.get(0));
 			enemyList.remove(0);
 		}
@@ -627,12 +629,13 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	}
 	
 	public void returnToMenu() {
+		while(enemyList.size() > 0) { enemyList.get(0).deleted = true; remove(enemyList.get(0)); enemyList.remove(0); 
+		System.out.println("Deleted");}
 		remove(spr);
+		tfEventArea.setText(quoteList.q0);
 		p = null; spr = null;
 		imgEnemy.setImage("");
-		//add(imgBG, 0, 30);
-		
-		while(enemyList.size() > 0) { remove(enemyList.get(0)); enemyList.remove(0); }
+		add(imgBG, 0, 30);
 		room.remove_components(roomNumber);
 		eL = new EnemyList(); eL.setMain(this);
 		
@@ -640,14 +643,15 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		
 		if (paused) { remove(imgPause); paused = false; }
 		
-		mapLayout.stopMusic();
+		musicCurrent.stop();
 		
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 15; col++) {
 				remove(tiles[row][col]);
 			}
 		}
-		
-		musicMenu.loop();
+		musicCurrent = musicMenu;
+		musicCurrent.loop();
+
 	}
 }
