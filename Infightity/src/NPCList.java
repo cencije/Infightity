@@ -15,7 +15,7 @@ public class NPCList {
     	npcArrayList.add(room0List);
     	ArrayList<ArrayList<CoordinatePair>> room1List = new ArrayList<ArrayList<CoordinatePair>>();
     	ArrayList<CoordinatePair> r1Chicken = new ArrayList<CoordinatePair>();
-    	r1Chicken.add(new CoordinatePair(210, 210, 1));// r1Chicken.add(new CoordinatePair(245, 150, 1));
+    	r1Chicken.add(new CoordinatePair(210, 210, 2));  r1Chicken.add(new CoordinatePair(245, 150, 1));
     	room1List.add(r1Chicken);
     	npcArrayList.add(room1List);
     	ArrayList<ArrayList<CoordinatePair>> room2List = new ArrayList<ArrayList<CoordinatePair>>();

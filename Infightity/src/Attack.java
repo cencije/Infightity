@@ -50,6 +50,7 @@ public class Attack extends GCompound implements Runnable {
 			}
 			else pause(DELAY);
 		}
+		t.cancel();
 		System.out.println("Shot done!");
 		removeAll();
 	}

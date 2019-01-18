@@ -193,10 +193,11 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			add(spr, x , y);
 			p.pX = 0; p.pY = 0; 
 		}
-		room.add_above_components(roomNumber);
-		roomLoaded = true;
 		insert_enemies();
 		insert_npcs();
+		room.add_above_components(roomNumber);
+		roomLoaded = true;
+		
 	}
 	public void setMap(ArrayList<ArrayList<Tile>> tilesP, ArrayList<ArrayList<Integer>> tileVals) {
 		tilePieces = tilesP; passableList = tileVals;
@@ -635,18 +636,18 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			if (npc.npcID == 1) {
 				if (npc.dir == 1) {
 					int ty2 = (int) (npc.getY() - 2 - 30 - 10) / 40;
-					if (!collide(false,ty2, (int) (npc.getX()) / 40) && !collide(false,ty2, (int) (npc.getX() + 17) / 40)) return false;
+					if (!collide(false,ty2, (int) (npc.getX()) / 40) && !collide(false,ty2, (int) (npc.getX() + 16) / 40)) return false;
 					else return true;
 				}
 				else if (npc.dir == 2) {
-					int tx2 = (int) (npc.getX() + 17 + 2) / 40;
+					int tx2 = (int) (npc.getX() + 17 + 1) / 40;
 					if (!collide(false,(int) (npc.getY() - 30) / 40, tx2) && !collide(false,(int) (npc.getY() - 5) / 40, tx2)) return false;
 					else return true;
 	
 				}
 				else if (npc.dir == 3) {
-					int ty2 = (int) (npc.getY() + 17 + 2 - 30) / 40;
-					if (!collide(false,ty2, (int) (npc.getX()) / 40) && !collide(false,ty2, (int) (npc.getX() + 17) / 40)) return false;
+					int ty2 = (int) (npc.getY() + 17 + 1 - 30) / 40;
+					if (!collide(false,ty2, (int) (npc.getX()) / 40) && !collide(false,ty2, (int) (npc.getX() + 16) / 40)) return false;
 					else return true;
 				}
 				else if (npc.dir == 4) {

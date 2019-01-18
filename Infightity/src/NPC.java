@@ -48,23 +48,20 @@ public class NPC extends GCompound implements Runnable {
     		
     		imgProfile = new GImage("../Images/Profiles/NPC/Person1_Prof.gif");
     	}
-    	GRect blk = new GRect(0,0,16,16);
+    	/*GRect blk = new GRect(0,0,16,16);
     	blk.setFilled(true);
     	blk.setFillColor(Color.BLACK);
-    	add(blk);
+    	add(blk);*/
     	
     	t = new Timer();
     	t.scheduleAtFixedRate(new TimerTask() {
     		public void run() {
                 int move = rand.nextInt(9);
-                System.out.println("NPC " + npcID + ": " + move);
                 if (move == 0) {
                 	move = rand.nextInt(4) + 1;
                 	changeSpriteWalking(move);
                 }
-                else if (move == 8) {
-                	changeSpriteStanding(); 
-                }
+                else if (move == 8) { changeSpriteStanding(); }
             }
     	}, 1000, 1000);
     	
@@ -85,13 +82,10 @@ public class NPC extends GCompound implements Runnable {
 	    				changeSpriteWalking(dir);
 	    			}
 	    		}
-	    		else {
-	    			System.out.println("Still good!");
-	    		}
     		}
     		else pause(DELAY);
     	}
-    	if (deleted) t.cancel(); System.out.println("NPC " + id + " Deleted");
+    	if (deleted) t.cancel();
     }
 	public void changeSpriteStanding() {
 		if (npcID == 1) {
@@ -103,7 +97,7 @@ public class NPC extends GCompound implements Runnable {
 		}
 	}
 	public void changeSpriteWalking(int newDir) {
-		
+		dir = newDir;
 		if (newDir == 1) {
     		if (npcID == 1) {
     			xMove = 0; yMove = -1;
