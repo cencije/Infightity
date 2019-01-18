@@ -613,6 +613,10 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		}
 		return true;
 	}
+	
+	public boolean collision_NPC(NPC npc) {
+		
+	}
 
 	public void checkComponents() {
 		for (int comp = 0; comp < componentList.size(); comp++) {
