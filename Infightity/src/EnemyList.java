@@ -133,10 +133,7 @@ public class EnemyList {
     		enemyListCurrent.add(e);
     	}
     }
-    public Enemy getEnemy(int enemyNo)
-    {
-        return enemyListCurrent.get(enemyNo);
-    }
+    public Enemy getEnemy(int enemyNo) { return enemyListCurrent.get(enemyNo); }
     public void setEnemyList(int roomNumber) {
     	clear_enemy_list();
     	int enemyNumber = 1;

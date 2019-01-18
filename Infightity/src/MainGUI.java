@@ -17,6 +17,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	Inventory inv = new Inventory();
 	MapLayout mapLayout = new MapLayout(this);
 	EnemyList eL;
+	NPCList npcL;
 	Room room;
 	AudioClip musicMenu = getAudioClip(getCodeBase(),"../Music/Main_Menu.wav"); 
 	AudioClip musicSnowFight = getAudioClip(getCodeBase(),"../Music/Snowball_Fight.wav"); 
@@ -73,6 +74,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 
 	ArrayList<Attack> attackList = new ArrayList<Attack>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+	ArrayList<NPC> npcList = new ArrayList<NPC>();
 	ArrayList<Component> componentList = new ArrayList<Component>();
 	boolean paused = false;
 
@@ -139,14 +141,15 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		addKeyListeners();
 
 		sm.setLists();
-		eL = new EnemyList();
-		eL.setMain(this);
+		eL = new EnemyList(); eL.setMain(this);
+		npcL = new NPCList(); npcL.setMain(this);
 		musicMenu.loop();
 	}
 	public void makeScreen(int roomNo) {
 		musicMenu.stop();
 		roomLoaded = false;
 		eL.setup_enemy_rooms();
+		npcL.setup_npc_rooms();
 		remove(imgBG);
 		roomNumber = roomNo;
 		room = new Room();
@@ -162,6 +165,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		mapLayout.startMusic(roomNumber);
 		roomLoaded = true;
 		insert_enemies();
+		insert_npcs();
 		drawWeather(condition);
 	}
 	public void changeScreen(int roomNo) {
@@ -171,7 +175,13 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			remove(enemyList.get(0));
 			enemyList.remove(0);
 		}
+		while(npcList.size() > 0) {
+			npcList.get(0).deleted = true;
+			remove(npcList.get(0));
+			npcList.remove(0);
+		}
 		enemyList.clear();
+		npcList.clear();
 		room.remove_components(roomNumber);
 		
 		roomNumber = roomNo;
@@ -186,6 +196,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		room.add_above_components(roomNumber);
 		roomLoaded = true;
 		insert_enemies();
+		insert_npcs();
 	}
 	public void setMap(ArrayList<ArrayList<Tile>> tilesP, ArrayList<ArrayList<Integer>> tileVals) {
 		tilePieces = tilesP; passableList = tileVals;
@@ -556,14 +567,18 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 			enemyList.add(eL.getEnemy(i));
 			add(eL.getEnemy(i), eL.getEnemy(i).x,  eL.getEnemy(i).y);
 		}
-		//imgEnemy.setVisible(true);
-		//glblEnemy.setVisible(true);
-		//rectHRem.setVisible(true);
-		//rectHBar.setVisible(true);
+	}
+	public void insert_npcs() {
+		npcL.setNPCList(roomNumber);
+		for (int i = 0; i < npcL.getNPCList().size(); i++) {
+			new Thread(npcL.getNPC(i)).start();
+			npcList.add(npcL.getNPC(i));
+			add(npcL.getNPC(i), npcL.getNPC(i).x, npcL.getNPC(i).y);
+		}
 	}
 	public boolean collision_Enemy(Enemy e) {
-		if (e.dir == 1 && e.getY() <= 30) return true;
 		if (roomLoaded) {
+			if (e.dir == 1 && e.getY() <= 30) return true;
 			if (e.enemyID == 1) {
 				if (e.dir == 1) {
 					int ty2 = (int) (e.getY() - 2 - 30 - 10) / 40;
@@ -615,7 +630,33 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	}
 	
 	public boolean collision_NPC(NPC npc) {
-		
+		if (roomLoaded) {
+			if (npc.dir == 1 && npc.getY() <= 30) return true;
+			if (npc.npcID == 1) {
+				if (npc.dir == 1) {
+					int ty2 = (int) (npc.getY() - 2 - 30 - 10) / 40;
+					if (!collide(false,ty2, (int) (npc.getX()) / 40) && !collide(false,ty2, (int) (npc.getX() + 17) / 40)) return false;
+					else return true;
+				}
+				else if (npc.dir == 2) {
+					int tx2 = (int) (npc.getX() + 17 + 2) / 40;
+					if (!collide(false,(int) (npc.getY() - 30) / 40, tx2) && !collide(false,(int) (npc.getY() - 5) / 40, tx2)) return false;
+					else return true;
+	
+				}
+				else if (npc.dir == 3) {
+					int ty2 = (int) (npc.getY() + 17 + 2 - 30) / 40;
+					if (!collide(false,ty2, (int) (npc.getX()) / 40) && !collide(false,ty2, (int) (npc.getX() + 17) / 40)) return false;
+					else return true;
+				}
+				else if (npc.dir == 4) {
+					int tx2 = (int) (npc.getX() - 5) / 40;
+					if (!collide(false,(int) (npc.getY() - 30) / 40, tx2) && !collide(false,(int) (npc.getY() - 5) / 40, tx2)) return false;
+					else return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public void checkComponents() {
