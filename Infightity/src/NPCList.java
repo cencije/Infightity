@@ -22,6 +22,10 @@ public class NPCList {
     	npcArrayList.add(room2List);
     	ArrayList<ArrayList<CoordinatePair>> room3List = new ArrayList<ArrayList<CoordinatePair>>();
     	npcArrayList.add(room3List);
+    	ArrayList<ArrayList<CoordinatePair>> room4List = new ArrayList<ArrayList<CoordinatePair>>();
+    	npcArrayList.add(room4List);
+    	ArrayList<ArrayList<CoordinatePair>> room5List = new ArrayList<ArrayList<CoordinatePair>>();
+    	npcArrayList.add(room5List);
 	}
 	
 	 public void setNPCList(int roomNumber) {

@@ -11,6 +11,7 @@ public class NPC extends GCompound implements Runnable {
 	private static final double DELAY = 30;
 	MainGUI mainGUI;
 	GImage imgTop, imgProfile;
+	String imgProf;
 	int id, npcID;
     String name, secondaryName;
     boolean paused = false, deleted = false;
@@ -32,13 +33,16 @@ public class NPC extends GCompound implements Runnable {
     	this.npcID = npcID;
     	
     	if (npcID == 1) {
+    		name = "Chicken";
     		if (dir == 1)      { imgTop = new GImage("../Images/Top_Sprites/NPC/Chicken_SU.gif"); xMove = 0; yMove = -1; }
     		else if (dir == 2) { imgTop = new GImage("../Images/Top_Sprites/NPC/Chicken_SR.gif"); xMove = 1; yMove = 0; }
     		else if (dir == 3) { imgTop = new GImage("../Images/Top_Sprites/NPC/Chicken_SD.gif"); xMove = 0; yMove = 1; }
     		else if (dir == 4) { imgTop = new GImage("../Images/Top_Sprites/NPC/Chicken_SL.gif"); xMove = -1; yMove = 0; }
     		imgProfile = new GImage("../Images/Profiles/NPC/Chicken.gif");
+    		imgProf = "../Images/Profiles/NPC/Chicken.gif";
     	}
     	if (npcID == 2) {
+    		name = "Human";
     		int dirStart = rand.nextInt(4) + 1;
     		dir = dirStart;
     		if (dir == 1)      { imgTop = new GImage("../Images/Top_Sprites/NPC/Person1_SU.gif"); xMove = 0; yMove = -2; }
@@ -47,6 +51,7 @@ public class NPC extends GCompound implements Runnable {
     		else if (dir == 4) { imgTop = new GImage("../Images/Top_Sprites/NPC/Person1_SL.gif"); xMove = -2; yMove = 0; }
     		
     		imgProfile = new GImage("../Images/Profiles/NPC/Person1_Prof.gif");
+    		imgProf = "../Images/Profiles/NPC/Person1_Prof.gif";
     	}
     	/*GRect blk = new GRect(0,0,16,16);
     	blk.setFilled(true);

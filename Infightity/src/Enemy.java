@@ -15,6 +15,7 @@ public class Enemy extends GCompound implements Runnable {
 	private static final double DELAY = 30;
 	MainGUI mainGUI;
 	GImage imgTop, imgProfile;
+	String imgProf;
 	int id, enemyID;
     String name, secondaryName;
     int healthTotal, healthCurrent, armor;
@@ -44,6 +45,7 @@ public class Enemy extends GCompound implements Runnable {
     	this.mainGUI = mainGUI;
     	this.enemyID = enemyID;
     	if (enemyID == 1) {
+    		name = "Morp"; imgProf = "../Images/Profiles/Enemy/E1_Morp.gif";
     		if (dir == 1)      { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_U.gif"); xMove = 0; yMove = -1; }
     		else if (dir == 2) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_R.gif"); xMove = 1; yMove = 0; }
     		else if (dir == 3) { imgTop = new GImage("../Images/Top_Sprites/Enemy/Morp_D.gif"); xMove = 0; yMove = 1; }
@@ -51,6 +53,7 @@ public class Enemy extends GCompound implements Runnable {
     		imgProfile = new GImage("../Images/Profiles/Enemy/E1_Morp.gif");
     	}
     	if (enemyID == 2) {
+    		name = "Peasant"; imgProf = "../Images/Profiles/Enemy/E2_Peasant.gif";
     		int dirStart = rand.nextInt(4) + 1;
     		dir = dirStart;
     		if (dir == 1)      { imgTop = new GImage("../Images/Top_Sprites/Enemy/Peasant_U.gif"); xMove = 0; yMove = -2; }

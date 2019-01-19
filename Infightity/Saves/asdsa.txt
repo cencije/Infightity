@@ -1,7 +1,7 @@
-asdsa 6 1 8 2 9 3 10 8
+asdsa  6 1 8 2 9 3 10 8
 Gold 25
-Room 1 90 125
-01/18/2019 16:46:49
+Room 1 116.0 265.0
+01/19/2019 02:12:05
 Potions 1 0 0
 Weapons
 Key_Items

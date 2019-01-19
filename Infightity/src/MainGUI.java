@@ -9,6 +9,7 @@ import java.util.Random;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GOval;
+import acm.graphics.GPoint;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
@@ -86,9 +87,9 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	boolean roomLoaded = false;
 	boolean enteredCave = true;
 
-	GLabel glblEnemy;
+	GLabel glblProf;
 	GRect rectHRem, rectHBar;
-	GImage imgEnemy;
+	GImage imgProf;
 	GRect rectProfile;
 	public void init() {
 		this.setSize(600,600); width = getWidth(); height = getHeight();
@@ -126,10 +127,10 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		rectProfile = new GRect(510,441,85,85); rectProfile.setFilled(true); rectProfile.setFillColor(menuColor); 
 		rectProfile.setColor(Color.WHITE); add(rectProfile);
 		
-		imgEnemy = new GImage(""); imgEnemy.setVisible(false);
-		add(imgEnemy, 512, 445);
-		glblEnemy = new GLabel("Morp", 552, 541); glblEnemy.setFont(new Font("Verdana", Font.PLAIN, 13));
-		glblEnemy.move(-glblEnemy.getWidth()/2, 0); glblEnemy.setVisible(false); add(glblEnemy);
+		imgProf = new GImage(""); imgProf.setVisible(false);
+		add(imgProf, 512, 445);
+		glblProf = new GLabel("", 552, 541); glblProf.setFont(new Font("Verdana", Font.PLAIN, 13));
+		glblProf.move(-glblProf.getWidth()/2, 0); glblProf.setVisible(false); add(glblProf);
 		
 		rectHRem = new GRect(510,550,85,15); rectHRem.setFilled(true); rectHRem.setFillColor(Color.RED); 
 		rectHRem.setColor(Color.BLACK); add(rectHRem); rectHRem.setVisible(false);
@@ -169,6 +170,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		drawWeather(condition);
 	}
 	public void changeScreen(int roomNo) {
+		imgProf.setVisible(false); glblProf.setVisible(false);
 		roomLoaded = false;
 		while(enemyList.size() > 0) {
 			enemyList.get(0).deleted = true;
@@ -520,8 +522,24 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 		}
 		}
 	}
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(GPoint e) {
 		System.out.println("Mouse | X: " + e.getX() + " Y: " + e.getY());
+		for (int i = 0; i < npcList.size(); i++) {
+			if (npcList.get(i).contains(e)) {
+				imgProf.setImage(npcList.get(i).imgProf); imgProf.setVisible(true); 
+				glblProf.setLabel(npcList.get(i).name); 
+				glblProf.setLocation(552, 541); glblProf.move(-glblProf.getWidth()/2, 0);
+				glblProf.setVisible(true);
+			}
+		}
+		for (int i = 0; i < enemyList.size(); i++) {
+			if (enemyList.get(i).contains(e)) {
+				imgProf.setImage(enemyList.get(i).imgProf); imgProf.setVisible(true); 
+				glblProf.setLabel(enemyList.get(i).name); 
+				glblProf.setLocation(552, 541); glblProf.move(-glblProf.getWidth()/2, 0);
+				glblProf.setVisible(true);
+			}
+		}
 	}
 	public void insertAttack(Attack objAtk, int dir) {
 		if (objAtk.cc >= 6 && objAtk.cc <= 8) {
@@ -678,10 +696,11 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	public void returnToMenu() {
 		while(enemyList.size() > 0) { enemyList.get(0).deleted = true; remove(enemyList.get(0)); enemyList.remove(0); }
 		while(npcList.size() > 0) { npcList.get(0).deleted = true; remove(npcList.get(0)); npcList.remove(0);  }
+		imgProf.setVisible(false); glblProf.setVisible(false);
 		remove(spr);
 		tfEventArea.setText(quoteList.q0);
 		p = null; spr = null;
-		imgEnemy.setImage("");
+		imgProf.setImage("");
 		add(imgBG, 0, 30);
 		room.remove_components(roomNumber);
 		eL = new EnemyList(); eL.setMain(this);
