@@ -61,7 +61,7 @@ public class NPC extends GCompound implements Runnable {
                 	move = rand.nextInt(4) + 1;
                 	changeSpriteWalking(move);
                 }
-                else if (move == 8) { changeSpriteStanding(); }
+                else if (move >= 5) { changeSpriteStanding(); }
             }
     	}, 1000, 1000);
     	

@@ -418,7 +418,8 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 						btnSG.setEnabled(false); btnLS.setEnabled(false);
 						btnQuit.setEnabled(false); btnINV.setEnabled(false);
 						for (int i = 0; i < enemyList.size(); i++) enemyList.get(i).paused = false; 
-						for (int i = 0; i < attackList.size(); i++) attackList.get(i).paused = false; 
+						for (int i = 0; i < attackList.size(); i++) attackList.get(i).paused = false;
+						for (int i = 0; i < npcList.size(); i++) npcList.get(i).paused = false;
 					}
 				}
 				else { 
@@ -427,6 +428,7 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 					btnQuit.setEnabled(true); btnINV.setEnabled(true);
 					for (int i = 0; i < enemyList.size(); i++)  enemyList.get(i).paused = true;
 					for (int i = 0; i < attackList.size(); i++) attackList.get(i).paused = true; 
+					for (int i = 0; i < npcList.size(); i++) npcList.get(i).paused = true;
 					spr.plr.set_xy(spr.getX(), spr.getY(), roomNumber);
 				}
 			}
@@ -674,8 +676,8 @@ public class MainGUI extends GraphicsProgram implements Runnable {
 	}
 	
 	public void returnToMenu() {
-		while(enemyList.size() > 0) { enemyList.get(0).deleted = true; remove(enemyList.get(0)); enemyList.remove(0); 
-		System.out.println("Deleted");}
+		while(enemyList.size() > 0) { enemyList.get(0).deleted = true; remove(enemyList.get(0)); enemyList.remove(0); }
+		while(npcList.size() > 0) { npcList.get(0).deleted = true; remove(npcList.get(0)); npcList.remove(0);  }
 		remove(spr);
 		tfEventArea.setText(quoteList.q0);
 		p = null; spr = null;
